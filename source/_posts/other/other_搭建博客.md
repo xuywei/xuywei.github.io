@@ -4,7 +4,7 @@ date: 2016-9-19
 categories: other
 ---
 
-### 准备工具node.js和git
+## 准备工具node.js和git
 
 > 安装node.js
 [window童鞋点这里](https://nodejs.org/dist/v4.5.0/node-v4.5.0-x64.msi)
@@ -17,7 +17,7 @@ categories: other
 [linux童鞋点这里](https://git-scm.com/download/linux)
 <!-- more -->
 
-### 用hexo创建博客
+## 用hexo创建博客
 
 下面的命令，你们可以在cmd中也可以用git中的git bash都可以，输入每个命令之后别忘了一个enter执行
 ```
@@ -30,13 +30,13 @@ hexo server（测试页面） http://localhost:4000
 ```
 > 这一步就ok了，你可以到目录source/_posts看到md文件，这里就是我们以后要编辑的博客，当然不会md语法的请查看我的另一篇文章
 
-### 开始写博客吧
+## 开始写博客吧
 
 > 新建文章：如hexo new "新建文章的标题"
 hexo new photo "标题"  生成一个带头图的文章，不过大可以不用，因为layout: photo经测试可以省略,直接写photos: 图片地址
 新建了之后，要查看写的结果，就用执行命令hexo server，之后访问本地回流地址http://localhost:4000
 
-### 部署的相关配置
+## 部署的相关配置
 编辑配置文件：vi _config.yml
 ```
 # Hexo Configuration
@@ -124,7 +124,7 @@ deploy:
   repo: git@github.com:xuywei/xuywei.github.io.git #github仓库地址
   branch: master # github分支
 ```
-### 部署到github
+## 部署到github
 > 创建github仓库：用户名.github.io 如：xuywei.github.io
 然后执行hexo deploy就自动提交.deploy_git的文件到部署配置的github仓库
 
@@ -135,7 +135,7 @@ hexo deploy部署hexo
 ```
 部署的时候会提示没有发现git，使用npm install hexo-deployer-git --save安装git插件，再次重新部署就可以了
 
-### 总结
+## 总结
 1. 安装node.js和git
 2. 安装hexo
 ```
