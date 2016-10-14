@@ -6,7 +6,7 @@ tags: [git疑难杂症]
 ---
 ## git远程仓库同步,历史提交不同导致错误
 ### 问题描述：
-![Paste_Image.png](http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![问题](http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 <!-- more -->
 这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）
 ### 解决办法:
