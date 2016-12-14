@@ -2,7 +2,7 @@
 title: pip的更新及常用第三方模块的安装
 date: YYYY-MM-DD HH:MM:SS
 categories: 
-tags: 
+tags: [python,pip]
 ---
 ## pip更新
 ```

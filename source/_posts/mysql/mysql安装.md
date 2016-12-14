@@ -2,7 +2,7 @@
 title: mysql常用命令
 date: 2016-10-14 13:33:33
 categories: mysql
-tags: 
+tags: [mysql]
 ---
 ## 下载MySQL
 > basedir = D:\mysql-5.6.34-winx64
@@ -40,20 +40,66 @@ mysqladmin -u root -p password "123456"
 ```
 ### 方法四：
 ```
-# 插入用户名和密码
+USE mysql;#开启mysql的数据库
+UPDATE mysql.user SET password=password('123456') where user='sxw' and host='localhost';#更新password字段
+```
+## mysql提示符
+mysql -uroot -p -P3306 -h127.0.0.1 --promat \D\d\h\u # 分别是具体时间，数据库名字，主机名，用户名
+## 新建用户
+### 方法一：
+```
+CREATE user 'sxw'@'localhost' identified by '123456';
+GRANT ALL PRIVILEGES ON *.* to 'sxw'@'localhost' identified by '123456';# 如果想远程登陆，将localhost替换为%，表示在任何一台电脑都可以登陆
+```
+### 方法二：
+```
 INSERT INTO mysql.user(HOST,USER,PASSWORD) VALUES ('localhost','sxw',PASSWORD('123456'));
-# 授权
-GRANT ALL PRIVILEGES ON langying.* TO 'sxw'@'%'IDENTIFIED BY 'sxw' WITH GRANT OPTION;
-# 刷新权限
+GRANT SELECT,UPDATE,CREATE,DROP,DELETE ON sxwDB.* TO 'sxw'@'%'IDENTIFIED BY '123456' WITH GRANT OPTION;#授权sxw用户对sxwDB这个数据库的所有表具有所有权限
 FLUSH PRIVILEGES;
 ```
 ## 查看MySQL版本
 ```
-进入mysql cmd
 方法一：status;
 方法二：select version();
 ```
 ## 查看MySQL端口号
 ```
 show global variables like 'port';
+```
+## 查看当前打开的数据库
+```
+select database();
+```
+## 查看当前时间
+```
+select now();
+```
+## 查看当前用户
+```
+select user();
+```
+## 查看当前所有用户名，密码，主机名
+```
+select user,password,host from mysql.user;
+```
+## 查看所有数据库
+```
+show databases;
+```
+## 打开数据库
+```
+use sxw;
+```
+## 列出所有表
+```
+show tables;
+```
+## 查看数据表结构
+```
+describe table_name;
+```
+## 删除数据库和数据表
+```
+drop database sxw;
+drop table table_name;
 ```
