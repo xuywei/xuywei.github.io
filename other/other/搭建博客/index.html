@@ -24,7 +24,7 @@
 <meta property="og:description" content="准备工具node.js和git 安装node.js官网地址点这里 安装gitwindow童鞋点这里mac童鞋点这里linux童鞋点这里">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1654122-36112496427111d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-09-27T05:37:36.000Z">
+<meta property="og:updated_time" content="2017-09-27T06:00:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+Github搭建自己的博客">
 <meta name="twitter:description" content="准备工具node.js和git 安装node.js官网地址点这里 安装gitwindow童鞋点这里mac童鞋点这里linux童鞋点这里">
@@ -396,8 +396,10 @@
 <h4 id="修改Apache的网络配置文件"><a href="#修改Apache的网络配置文件" class="headerlink" title="修改Apache的网络配置文件"></a>修改Apache的网络配置文件</h4><p>修改web配置/etc/httpd/conf/httpd.conf文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">ServerTokens Prod(默认为OS显示，意思是出现错误页时是否显示服务器操作系统名称)</div><div class="line">DocumentRoot &quot;/var/www/hexo&quot;（web网站文件所在处）</div><div class="line">DirectoryIndex index.html index.cgi index.php（首页样式）</div><div class="line">DefaultType text/plain（默认web类型）</div><div class="line">KeepAlive On是否持续连接（因为每次连接都得三次握手，如果是访问量不大，建议打开此项，如果网站访问量比较大关闭此项比较好），修改为：KeepAlive On 表示允许程序性联机</div><div class="line">ServerAdmin root@localhost（管理员的邮箱）</div><div class="line">重启Apache使之生效</div><div class="line">service httpd restart</div><div class="line">配置Nginx</div><div class="line">sudo apt-get install nginx</div><div class="line">修改 Nginx 的 default 设置</div><div class="line">sudo vim /etc/nginx/sites-available/default</div><div class="line">将其中的 root 指令指向 /var/www/hexo 目录</div><div class="line">root /var/www/hexo;        </div><div class="line">重启Nginx使之生效</div><div class="line">sudo service nginx restart</div></pre></td></tr></table></figure></p>
 <h3 id="创建Git-hooks"><a href="#创建Git-hooks" class="headerlink" title="创建Git hooks"></a>创建Git hooks</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">接下来，在服务器上的裸仓库 hexo_static 创建一个钩子，在满足特定条件时将静态 HTML 文件传送到 Web 服务器的目录下，即 /var/www/hexo。在自动生成的 hooks 目录下创建一个新的钩子文件：</div><div class="line">vim /var/repo/hexo_static.git/hooks/post-receive</div><div class="line">在该文件中添加两行代码，指定 Git 的工作树（源代码）和 Git 目录（配置文件等）。</div><div class="line">#!/bin/bash</div><div class="line">git --work-tree=/var/www/hexo --git-dir=/var/repo/sxw_blog.git checkout -f</div><div class="line">保存并退出文件，并让该文件变为可执行文件。</div><div class="line">chmod +x /var/repo/hexo_static.git/hooks/post-receive</div></pre></td></tr></table></figure>
 <h3 id="解析域名，hexo-clean-hexo-g-hexo-d看看好了没"><a href="#解析域名，hexo-clean-hexo-g-hexo-d看看好了没" class="headerlink" title="解析域名，hexo clean hexo g hexo d看看好了没"></a>解析域名，hexo clean hexo g hexo d看看好了没</h3><ol>
-<li>写博客的一些小细节<br><img src="http://upload-images.jianshu.io/upload_images/1654122-36112496427111d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="博客的样式图"><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">layout: photo #这个属性是博客的样式，有一个头图样式,如上图</div><div class="line">title: test2 #标题</div><div class="line">date: 2016-09-20 13:55:04 #写作时间</div><div class="line">tags: [haha,toot,huhu] #多个标签</div><div class="line">photos: http://bruce.u.qiniudn.com/2013/11/27/reading/photos-1.jpg #图片的地址</div><div class="line">description: 你对本页的描述--- #只是对文章的一个描述，点开文章不会再有</div></pre></td></tr></table></figure></li>
+<li>写博客的一些小细节<br><img src="http://upload-images.jianshu.io/upload_images/1654122-36112496427111d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="博客的样式图"><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">layout: photo #这个属性是博客的样式，有一个头图样式,如上图</div><div class="line">title: test2 #标题</div><div class="line">date: 2016-09-20 13:55:04 #写作时间</div><div class="line">tags: [haha,toot,huhu] #多个标签</div><div class="line">photos: http://bruce.u.qiniudn.com/2013/11/27/reading/photos-1.jpg #图片的地址</div><div class="line">description: 你对本页的描述--- #只是对文章的一个描述，点开文章不会再有</div></pre></td></tr></table></figure>
+</li>
 </ol>
+<p>10.原理+注意事项（必看）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">其实hexo也就是一套自动生成静态页面的开源项目，我们平时写博客用的是source文件夹，当hexo g的时候就是编译的时候，会在public里多出一个html文件，里面就是我们的博客内容了，所以，你看吧，source里都是我们的md文件，</div><div class="line">public里都是html文件，hexo就只是实现md---&gt;html，然后html你可以自己发布到web服务器，当然你也可以用它的配置自动部署到web服务器，hexo d就是部署的意思，hexo会根据你配置的git远程目录，自动执行push操作，把</div><div class="line">html文件同步到远程git仓库，当然，你可以将web服务器的地址直接设置为git仓库的文件夹，也可以通过设置hook，将同步的文件设置为dir，web服务器路径设置为工作路径，这样就会直接clone一套到这个工作路径。</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -409,7 +411,7 @@
         <p><span>本文标题:</span><a href="/other/other/搭建博客/">Hexo+Github搭建自己的博客</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">sxw</a></p>
         <p><span>发布时间:</span>2016-09-19, 00:00:00</p>
-        <p><span>最后更新:</span>2017-09-27, 13:37:36</p>
+        <p><span>最后更新:</span>2017-09-27, 14:00:30</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/other/other/搭建博客/" title="Hexo+Github搭建自己的博客">http://23.106.148.149/other/other/搭建博客/</a>
             <span class="copy-path" data-clipboard-text="原文: http://23.106.148.149/other/other/搭建博客/　　作者: sxw" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -425,17 +427,11 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/other/other/复杂度算法/">
-                    时间复杂度O(n),空间复杂度O(1)
+                <a href="/other/python/Python教程(二)/">
+                    Python教程(二)
                 </a>
             </div>
         
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/other/python/Python教程(一)/">
-                    Python教程(一)
-                </a>
-            </div>
         
     </nav>
 
@@ -520,7 +516,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/other/other/复杂度算法/" title="上一篇: 时间复杂度O(n),空间复杂度O(1)">
+            <a href="/other/python/Python教程(二)/" title="上一篇: Python教程(二)">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -528,13 +524,11 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/other/python/Python教程(一)/" title="下一篇: Python教程(一)">
-                <i class="fa fa-angle-right"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/uncategorized/python/pip相关/">pip的更新及常用第三方模块的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql/mysql/mysql安装/">mysql常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/other/other/MarkDowm语法/">MarkDowm语法</a></li><li class="post-list-item"><a class="post-list-link" href="/Git/git/git教程(二)/">git教程(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/Git/git/git疑难杂症/">git疑难杂症总结</a></li><li class="post-list-item"><a class="post-list-link" href="/Git/git/git教程(三)/">git教程(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/Git/git/git教程(一)/">git教程(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/设计模式/design_mode/单例模式/">单例设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/android/android/OkHttp详解/">OkHttp使用详解</a></li><li class="post-list-item"><a class="post-list-link" href="/android/android/app沉浸式/">app沉浸式</a></li><li class="post-list-item"><a class="post-list-link" href="/other/other/复杂度算法/">时间复杂度O(n),空间复杂度O(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/other/other/搭建博客/">Hexo+Github搭建自己的博客</a></li><li class="post-list-item"><a class="post-list-link" href="/other/python/Python教程(一)/">Python教程(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/other/python/Python教程(二)/">Python教程(二)</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/uncategorized/python/pip相关/">pip的更新及常用第三方模块的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql/mysql/mysql安装/">mysql常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/other/other/MarkDowm语法/">MarkDowm语法</a></li><li class="post-list-item"><a class="post-list-link" href="/Git/git/git教程(三)/">git教程(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/Git/git/git教程(二)/">git教程(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/Git/git/git疑难杂症/">git疑难杂症总结</a></li><li class="post-list-item"><a class="post-list-link" href="/Git/git/git教程(一)/">git教程(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/设计模式/design_mode/单例模式/">单例设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/android/android/OkHttp详解/">OkHttp使用详解</a></li><li class="post-list-item"><a class="post-list-link" href="/android/android/app沉浸式/">app沉浸式</a></li><li class="post-list-item"><a class="post-list-link" href="/other/other/复杂度算法/">时间复杂度O(n),空间复杂度O(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/other/python/Python教程(一)/">Python教程(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/other/python/Python教程(二)/">Python教程(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/other/other/搭建博客/">Hexo+Github搭建自己的博客</a></li></ul>
 
 
 
