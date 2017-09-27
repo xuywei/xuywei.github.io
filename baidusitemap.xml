@@ -24,14 +24,14 @@
 
     
   <url>
-    <loc>http://23.106.148.149/android/android/app%E6%B2%89%E6%B5%B8%E5%BC%8F/</loc>
+    <loc>http://23.106.148.149/android/android/OkHttp%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     <data>
         <display>
-        <title>app沉浸式</title>
-        <pubTime>2016-09-19T16:00:00.000Z</pubTime>
+        <title>OkHttp使用详解</title>
+        <pubTime>2016-09-21T01:27:12.000Z</pubTime>
         
-        <tag>沉浸</tag>
+        <tag>Interceptor拦截器</tag>
          
          
            
@@ -44,19 +44,19 @@
 
     
   <url>
-    <loc>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%80)/</loc>
+    <loc>http://23.106.148.149/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/design_mode/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     <data>
         <display>
-        <title>git教程(一)</title>
-        <pubTime>2016-09-21T01:49:33.000Z</pubTime>
+        <title>单例设计模式</title>
+        <pubTime>2016-09-21T01:46:33.000Z</pubTime>
         
-        <tag>git安装初始化配置</tag>
+        <tag>单例模式</tag>
          
          
            
              
-              <breadCrumb title="Git" url="http://23.106.148.149/categories/Git/"/>
+              <breadCrumb title="设计模式" url="http://23.106.148.149/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
           
         </display>
     </data>
@@ -72,6 +72,26 @@
         <pubTime>2016-09-21T01:52:33.000Z</pubTime>
         
         <tag>git同步远程仓库</tag>
+         
+         
+           
+             
+              <breadCrumb title="Git" url="http://23.106.148.149/categories/Git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%80)/</loc>
+    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>git教程(一)</title>
+        <pubTime>2016-09-21T01:49:33.000Z</pubTime>
+        
+        <tag>git安装初始化配置</tag>
          
          
            
@@ -124,26 +144,6 @@
 
     
   <url>
-    <loc>http://23.106.148.149/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/design_mode/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
-    <data>
-        <display>
-        <title>单例设计模式</title>
-        <pubTime>2016-09-21T01:46:33.000Z</pubTime>
-        
-        <tag>单例模式</tag>
-         
-         
-           
-             
-              <breadCrumb title="设计模式" url="http://23.106.148.149/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://23.106.148.149/mysql/mysql/mysql%E5%AE%89%E8%A3%85/</loc>
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     <data>
@@ -164,14 +164,14 @@
 
     
   <url>
-    <loc>http://23.106.148.149/android/android/OkHttp%E8%AF%A6%E8%A7%A3/</loc>
+    <loc>http://23.106.148.149/android/android/app%E6%B2%89%E6%B5%B8%E5%BC%8F/</loc>
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     <data>
         <display>
-        <title>OkHttp使用详解</title>
-        <pubTime>2016-09-21T01:27:12.000Z</pubTime>
+        <title>app沉浸式</title>
+        <pubTime>2016-09-19T16:00:00.000Z</pubTime>
         
-        <tag>Interceptor拦截器</tag>
+        <tag>沉浸</tag>
          
          
            
