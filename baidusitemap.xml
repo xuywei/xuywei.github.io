@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://23.106.148.149/android/android/OkHttp%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2018-03-28T09:49:57.691Z</lastmod>
+    <data>
+        <display>
+        <title>OkHttp使用详解</title>
+        <pubTime>2016-09-21T01:27:12.000Z</pubTime>
+        
+        <tag>Interceptor拦截器</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://23.106.148.149/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://23.106.148.149/other/other/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2017-09-27T06:00:30.000Z</lastmod>
     <data>
@@ -14,26 +34,6 @@
         <tag>Hexo</tag>
          
         <tag>node.js</tag>
-         
-         
-           
-             
-              <breadCrumb title="other" url="http://23.106.148.149/categories/other/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://23.106.148.149/other/python/Python%E6%95%99%E7%A8%8B(%E4%B8%80)/</loc>
-    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
-    <data>
-        <display>
-        <title>Python教程(一)</title>
-        <pubTime>2016-09-18T16:00:00.000Z</pubTime>
-        
-        <tag>Python入门语法</tag>
          
          
            
@@ -264,25 +264,25 @@
     </url>
 
     
+    
+    
   <url>
-    <loc>http://23.106.148.149/android/android/OkHttp%E8%AF%A6%E8%A7%A3/</loc>
+    <loc>http://23.106.148.149/other/python/Python%E6%95%99%E7%A8%8B(%E4%B8%80)/</loc>
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     <data>
         <display>
-        <title>OkHttp使用详解</title>
-        <pubTime>2016-09-21T01:27:12.000Z</pubTime>
+        <title>Python教程(一)</title>
+        <pubTime>2016-09-18T16:00:00.000Z</pubTime>
         
-        <tag>Interceptor拦截器</tag>
+        <tag>Python入门语法</tag>
          
          
            
              
-              <breadCrumb title="android" url="http://23.106.148.149/categories/android/"/>
+              <breadCrumb title="other" url="http://23.106.148.149/categories/other/"/>
           
         </display>
     </data>
     </url>
 
-    
-    
 </urlset>
