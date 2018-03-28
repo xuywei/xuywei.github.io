@@ -300,10 +300,10 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-other/复杂度算法" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python/Python教程(二)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/other/other/复杂度算法/" class="article-date">
+      <a href="/other/python/Python教程(二)/" class="article-date">
       <time datetime="2016-09-18T16:00:00.000Z" itemprop="datePublished">2016-09-19</time>
 </a>
 
@@ -319,7 +319,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/other/other/复杂度算法/">时间复杂度O(n),空间复杂度O(1)</a>
+      <a class="article-title" href="/other/python/Python教程(二)/">Python教程(二)</a>
     </h1>
   
 
@@ -329,8 +329,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="对n个数进行排序，时间复杂度O-n-空间复杂度O-1"><a href="#对n个数进行排序，时间复杂度O-n-空间复杂度O-1" class="headerlink" title="对n个数进行排序，时间复杂度O(n),空间复杂度O(1)"></a>对n个数进行排序，时间复杂度O(n),空间复杂度O(1)</h2><h3 id="一个算法题"><a href="#一个算法题" class="headerlink" title="一个算法题"></a>一个算法题</h3><p>转载的一个解释，暂时看懵了，先mark记录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">看上去似乎任何已知的算法都无法做到，如果谁做到了，那么所有的排序方法：QuickSort，ShellSort，HeapSort，BubbleSort等等等等，都可以扔掉了，还要这些算法干吗阿，呵呵。不过实际上，在数字范围有限制的情况下，是有一个这样的算法的，只需要用一个数组记录每个数字出现次数就可以了。</div><div class="line"></div><div class="line">假定你的数字范围在0到65535范围之内，定义一个数组count[65536]（这个空间是常量，和n无关，所以是O(1) )，初值全部为0。</div><div class="line">那么假设有下面这些数字：</div><div class="line">100</div><div class="line">200</div><div class="line">300</div><div class="line">119</div><div class="line">0</div><div class="line">6</div><div class="line">...</div><div class="line">那么对于每个这个数字，都做在count中记录一下：</div><div class="line">100 =&gt; count[100]++</div><div class="line">200 =&gt; count[200]++</div><div class="line">300 =&gt; count[300]++</div><div class="line">119 =&gt; count[119]++</div><div class="line">0 =&gt; count[0]++</div><div class="line">6 =&gt; count[6]++</div><div class="line">...</div><div class="line">最后，遍历一边所有这些数字就可得到0~65535每个数字的个数（在count数组中），然后再顺序遍历count数组，count[n] = m，则输出m个n，（比如说有count[3] = 2, 那么说明有2个数字3），依次输出，最后可得结果。第一次遍历是O(n)，第二次遍历是O(1)，为常量，所以最后的时间复杂度为O(n)，而空间复杂度为O(1)</div><div class="line">这个算法很简单，相信大家都会，只是这个题太过于变态了，一般会把面试者吓住</div></pre></td></tr></table></figure></p>
-
+              <h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote>
+<p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p>
+</blockquote>
+          
       
     </div>
     
@@ -344,9 +346,13 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/O-n-和O-1/">O(n)和O(1)</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python函数/">Python函数</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/other/python/Python教程(二)/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -437,10 +443,10 @@
 
 
   
-    <article id="post-python/Python教程(二)" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-other/复杂度算法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/other/python/Python教程(二)/" class="article-date">
+      <a href="/other/other/复杂度算法/" class="article-date">
       <time datetime="2016-09-18T16:00:00.000Z" itemprop="datePublished">2016-09-19</time>
 </a>
 
@@ -456,7 +462,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/other/python/Python教程(二)/">Python教程(二)</a>
+      <a class="article-title" href="/other/other/复杂度算法/">时间复杂度O(n),空间复杂度O(1)</a>
     </h1>
   
 
@@ -466,10 +472,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote>
-<p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p>
-</blockquote>
-          
+        <h2 id="对n个数进行排序，时间复杂度O-n-空间复杂度O-1"><a href="#对n个数进行排序，时间复杂度O-n-空间复杂度O-1" class="headerlink" title="对n个数进行排序，时间复杂度O(n),空间复杂度O(1)"></a>对n个数进行排序，时间复杂度O(n),空间复杂度O(1)</h2><h3 id="一个算法题"><a href="#一个算法题" class="headerlink" title="一个算法题"></a>一个算法题</h3><p>转载的一个解释，暂时看懵了，先mark记录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">看上去似乎任何已知的算法都无法做到，如果谁做到了，那么所有的排序方法：QuickSort，ShellSort，HeapSort，BubbleSort等等等等，都可以扔掉了，还要这些算法干吗阿，呵呵。不过实际上，在数字范围有限制的情况下，是有一个这样的算法的，只需要用一个数组记录每个数字出现次数就可以了。</div><div class="line"></div><div class="line">假定你的数字范围在0到65535范围之内，定义一个数组count[65536]（这个空间是常量，和n无关，所以是O(1) )，初值全部为0。</div><div class="line">那么假设有下面这些数字：</div><div class="line">100</div><div class="line">200</div><div class="line">300</div><div class="line">119</div><div class="line">0</div><div class="line">6</div><div class="line">...</div><div class="line">那么对于每个这个数字，都做在count中记录一下：</div><div class="line">100 =&gt; count[100]++</div><div class="line">200 =&gt; count[200]++</div><div class="line">300 =&gt; count[300]++</div><div class="line">119 =&gt; count[119]++</div><div class="line">0 =&gt; count[0]++</div><div class="line">6 =&gt; count[6]++</div><div class="line">...</div><div class="line">最后，遍历一边所有这些数字就可得到0~65535每个数字的个数（在count数组中），然后再顺序遍历count数组，count[n] = m，则输出m个n，（比如说有count[3] = 2, 那么说明有2个数字3），依次输出，最后可得结果。第一次遍历是O(n)，第二次遍历是O(1)，为常量，所以最后的时间复杂度为O(n)，而空间复杂度为O(1)</div><div class="line">这个算法很简单，相信大家都会，只是这个题太过于变态了，一般会把面试者吓住</div></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -483,13 +487,9 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python函数/">Python函数</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/O-n-和O-1/">O(n)和O(1)</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/other/python/Python教程(二)/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -588,7 +588,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016-2017 sxw
+                2016-2018 sxw
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>

@@ -85,6 +85,28 @@
   </entry>
   
   <entry>
+    <title>git疑难杂症总结</title>
+    <link href="http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
+    <id>http://23.106.148.149/Git/git/git疑难杂症/</id>
+    <published>2016-09-21T01:52:33.000Z</published>
+    <updated>2017-09-27T05:37:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure><h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure><h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;git远程仓库同步-历史提交不同导致错误&quot;&gt;&lt;a href=&quot;#git远程仓库同步-历史提交不同导致错误&quot; class=&quot;headerlink&quot; title=&quot;git远程仓库同步,历史提交不同导致错误&quot;&gt;&lt;/a&gt;git远程仓库同步,历史提交不同导致错误&lt;/h2&gt;&lt;h3 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;问题&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
+    
+    
+      <category term="git疑难杂症" scheme="http://23.106.148.149/tags/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
+    
+  </entry>
+  
+  <entry>
     <title>git教程(三)</title>
     <link href="http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%89)/"/>
     <id>http://23.106.148.149/Git/git/git教程(三)/</id>
@@ -127,28 +149,6 @@
     
     
       <category term="git本地提交" scheme="http://23.106.148.149/tags/git%E6%9C%AC%E5%9C%B0%E6%8F%90%E4%BA%A4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git疑难杂症总结</title>
-    <link href="http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
-    <id>http://23.106.148.149/Git/git/git疑难杂症/</id>
-    <published>2016-09-21T01:52:33.000Z</published>
-    <updated>2017-09-27T05:37:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure><h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure><h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;git远程仓库同步-历史提交不同导致错误&quot;&gt;&lt;a href=&quot;#git远程仓库同步-历史提交不同导致错误&quot; class=&quot;headerlink&quot; title=&quot;git远程仓库同步,历史提交不同导致错误&quot;&gt;&lt;/a&gt;git远程仓库同步,历史提交不同导致错误&lt;/h2&gt;&lt;h3 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;问题&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
-    
-    
-      <category term="git疑难杂症" scheme="http://23.106.148.149/tags/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
     
   </entry>
   
@@ -250,27 +250,26 @@
   </entry>
   
   <entry>
-    <title>时间复杂度O(n),空间复杂度O(1)</title>
-    <link href="http://23.106.148.149/other/other/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%AE%97%E6%B3%95/"/>
-    <id>http://23.106.148.149/other/other/复杂度算法/</id>
+    <title>Python教程(二)</title>
+    <link href="http://23.106.148.149/other/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
+    <id>http://23.106.148.149/other/python/Python教程(二)/</id>
     <published>2016-09-18T16:00:00.000Z</published>
     <updated>2017-09-27T05:37:36.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="对n个数进行排序，时间复杂度O-n-空间复杂度O-1"><a href="#对n个数进行排序，时间复杂度O-n-空间复杂度O-1" class="headerlink" title="对n个数进行排序，时间复杂度O(n),空间复杂度O(1)"></a>对n个数进行排序，时间复杂度O(n),空间复杂度O(1)</h2><h3 id="一个算法题"><a href="#一个算法题" class="headerlink" title="一个算法题"></a>一个算法题</h3><p>转载的一个解释，暂时看懵了，先mark记录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">看上去似乎任何已知的算法都无法做到，如果谁做到了，那么所有的排序方法：QuickSort，ShellSort，HeapSort，BubbleSort等等等等，都可以扔掉了，还要这些算法干吗阿，呵呵。不过实际上，在数字范围有限制的情况下，是有一个这样的算法的，只需要用一个数组记录每个数字出现次数就可以了。</div><div class="line"></div><div class="line">假定你的数字范围在0到65535范围之内，定义一个数组count[65536]（这个空间是常量，和n无关，所以是O(1) )，初值全部为0。</div><div class="line">那么假设有下面这些数字：</div><div class="line">100</div><div class="line">200</div><div class="line">300</div><div class="line">119</div><div class="line">0</div><div class="line">6</div><div class="line">...</div><div class="line">那么对于每个这个数字，都做在count中记录一下：</div><div class="line">100 =&gt; count[100]++</div><div class="line">200 =&gt; count[200]++</div><div class="line">300 =&gt; count[300]++</div><div class="line">119 =&gt; count[119]++</div><div class="line">0 =&gt; count[0]++</div><div class="line">6 =&gt; count[6]++</div><div class="line">...</div><div class="line">最后，遍历一边所有这些数字就可得到0~65535每个数字的个数（在count数组中），然后再顺序遍历count数组，count[n] = m，则输出m个n，（比如说有count[3] = 2, 那么说明有2个数字3），依次输出，最后可得结果。第一次遍历是O(n)，第二次遍历是O(1)，为常量，所以最后的时间复杂度为O(n)，而空间复杂度为O(1)</div><div class="line">这个算法很简单，相信大家都会，只是这个题太过于变态了，一般会把面试者吓住</div></pre></td></tr></table></figure></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote><p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p></blockquote><a id="more"></a><h2 id="Python的函数"><a href="#Python的函数" class="headerlink" title="Python的函数"></a>Python的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class TestClass(object):</div><div class="line">    version = 1.9</div><div class="line">    def __init__(self,nm=&apos;xuwei&apos;):</div><div class="line">        self.name = nm</div><div class="line">        print(nm)</div><div class="line">    def showName(self):</div><div class="line">        print(self.name)</div><div class="line">    def showVersion(self):</div><div class="line">        print(self.version)</div><div class="line">myClass=TestClass()</div><div class="line">myClass.showName()</div><div class="line">myClass.showVersion()</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">sys.stdout.write(&apos;Hello World!\n&apos;)  # 代码的输出，调用了标准的write()方法</div><div class="line">print(sys.platform)  # 平台</div><div class="line">print(sys.version)  # python版本</div><div class="line"># help(dir)</div><div class="line">print(int(&apos;5&apos;))  # 5</div><div class="line">print(len(&apos;sdfas&apos;))  # 5</div><div class="line">print(list(range(5, 15, 2)))  # [5, 7, 9, 11, 13]</div><div class="line">print(str(3434))  # 3434</div><div class="line">print(type(56))  # &lt;class &apos;int&apos;&gt;</div><div class="line"># input(&apos;输入：&apos;)  # 输入：45</div><div class="line">print(dir(sys))  # sys模块中的所有属性</div><div class="line">print(dir)  # &lt;built-in function dir&gt;</div><div class="line">print(dir())  # 没有提供参数，就是显示全局变量的名字的列表print(type(dir))  # &lt;class &apos;builtin_function_or_method&apos;&gt;</div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h2 id=&quot;对n个数进行排序，时间复杂度O-n-空间复杂度O-1&quot;&gt;&lt;a href=&quot;#对n个数进行排序，时间复杂度O-n-空间复杂度O-1&quot; class=&quot;headerlink&quot; title=&quot;对n个数进行排序，时间复杂度O(n),空间复杂度O(1)&quot;&gt;&lt;/a&gt;对n个数进行
-      
+      &lt;h2 id=&quot;函数的5类参数&quot;&gt;&lt;a href=&quot;#函数的5类参数&quot; class=&quot;headerlink&quot; title=&quot;函数的5类参数&quot;&gt;&lt;/a&gt;函数的5类参数&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
       <category term="other" scheme="http://23.106.148.149/categories/other/"/>
     
     
-      <category term="O(n)和O(1)" scheme="http://23.106.148.149/tags/O-n-%E5%92%8CO-1/"/>
+      <category term="Python函数" scheme="http://23.106.148.149/tags/Python%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
@@ -302,26 +301,27 @@
   </entry>
   
   <entry>
-    <title>Python教程(二)</title>
-    <link href="http://23.106.148.149/other/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
-    <id>http://23.106.148.149/other/python/Python教程(二)/</id>
+    <title>时间复杂度O(n),空间复杂度O(1)</title>
+    <link href="http://23.106.148.149/other/other/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%AE%97%E6%B3%95/"/>
+    <id>http://23.106.148.149/other/other/复杂度算法/</id>
     <published>2016-09-18T16:00:00.000Z</published>
     <updated>2017-09-27T05:37:36.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote><p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p></blockquote><a id="more"></a><h2 id="Python的函数"><a href="#Python的函数" class="headerlink" title="Python的函数"></a>Python的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class TestClass(object):</div><div class="line">    version = 1.9</div><div class="line">    def __init__(self,nm=&apos;xuwei&apos;):</div><div class="line">        self.name = nm</div><div class="line">        print(nm)</div><div class="line">    def showName(self):</div><div class="line">        print(self.name)</div><div class="line">    def showVersion(self):</div><div class="line">        print(self.version)</div><div class="line">myClass=TestClass()</div><div class="line">myClass.showName()</div><div class="line">myClass.showVersion()</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">sys.stdout.write(&apos;Hello World!\n&apos;)  # 代码的输出，调用了标准的write()方法</div><div class="line">print(sys.platform)  # 平台</div><div class="line">print(sys.version)  # python版本</div><div class="line"># help(dir)</div><div class="line">print(int(&apos;5&apos;))  # 5</div><div class="line">print(len(&apos;sdfas&apos;))  # 5</div><div class="line">print(list(range(5, 15, 2)))  # [5, 7, 9, 11, 13]</div><div class="line">print(str(3434))  # 3434</div><div class="line">print(type(56))  # &lt;class &apos;int&apos;&gt;</div><div class="line"># input(&apos;输入：&apos;)  # 输入：45</div><div class="line">print(dir(sys))  # sys模块中的所有属性</div><div class="line">print(dir)  # &lt;built-in function dir&gt;</div><div class="line">print(dir())  # 没有提供参数，就是显示全局变量的名字的列表print(type(dir))  # &lt;class &apos;builtin_function_or_method&apos;&gt;</div></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h2 id="对n个数进行排序，时间复杂度O-n-空间复杂度O-1"><a href="#对n个数进行排序，时间复杂度O-n-空间复杂度O-1" class="headerlink" title="对n个数进行排序，时间复杂度O(n),空间复杂度O(1)"></a>对n个数进行排序，时间复杂度O(n),空间复杂度O(1)</h2><h3 id="一个算法题"><a href="#一个算法题" class="headerlink" title="一个算法题"></a>一个算法题</h3><p>转载的一个解释，暂时看懵了，先mark记录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">看上去似乎任何已知的算法都无法做到，如果谁做到了，那么所有的排序方法：QuickSort，ShellSort，HeapSort，BubbleSort等等等等，都可以扔掉了，还要这些算法干吗阿，呵呵。不过实际上，在数字范围有限制的情况下，是有一个这样的算法的，只需要用一个数组记录每个数字出现次数就可以了。</div><div class="line"></div><div class="line">假定你的数字范围在0到65535范围之内，定义一个数组count[65536]（这个空间是常量，和n无关，所以是O(1) )，初值全部为0。</div><div class="line">那么假设有下面这些数字：</div><div class="line">100</div><div class="line">200</div><div class="line">300</div><div class="line">119</div><div class="line">0</div><div class="line">6</div><div class="line">...</div><div class="line">那么对于每个这个数字，都做在count中记录一下：</div><div class="line">100 =&gt; count[100]++</div><div class="line">200 =&gt; count[200]++</div><div class="line">300 =&gt; count[300]++</div><div class="line">119 =&gt; count[119]++</div><div class="line">0 =&gt; count[0]++</div><div class="line">6 =&gt; count[6]++</div><div class="line">...</div><div class="line">最后，遍历一边所有这些数字就可得到0~65535每个数字的个数（在count数组中），然后再顺序遍历count数组，count[n] = m，则输出m个n，（比如说有count[3] = 2, 那么说明有2个数字3），依次输出，最后可得结果。第一次遍历是O(n)，第二次遍历是O(1)，为常量，所以最后的时间复杂度为O(n)，而空间复杂度为O(1)</div><div class="line">这个算法很简单，相信大家都会，只是这个题太过于变态了，一般会把面试者吓住</div></pre></td></tr></table></figure></p>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;函数的5类参数&quot;&gt;&lt;a href=&quot;#函数的5类参数&quot; class=&quot;headerlink&quot; title=&quot;函数的5类参数&quot;&gt;&lt;/a&gt;函数的5类参数&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。&lt;/p&gt;
-&lt;/blockquote&gt;
+      
+      
+        &lt;h2 id=&quot;对n个数进行排序，时间复杂度O-n-空间复杂度O-1&quot;&gt;&lt;a href=&quot;#对n个数进行排序，时间复杂度O-n-空间复杂度O-1&quot; class=&quot;headerlink&quot; title=&quot;对n个数进行排序，时间复杂度O(n),空间复杂度O(1)&quot;&gt;&lt;/a&gt;对n个数进行
+      
     
     </summary>
     
       <category term="other" scheme="http://23.106.148.149/categories/other/"/>
     
     
-      <category term="Python函数" scheme="http://23.106.148.149/tags/Python%E5%87%BD%E6%95%B0/"/>
+      <category term="O(n)和O(1)" scheme="http://23.106.148.149/tags/O-n-%E5%92%8CO-1/"/>
     
   </entry>
   
