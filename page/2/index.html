@@ -192,16 +192,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
@@ -212,12 +202,32 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -240,148 +250,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://23.106.148.149/other/other/复杂度算法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="sxw">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sxw">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/other/other/复杂度算法/" itemprop="url">时间复杂度O(n),空间复杂度O(1)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-19T00:00:00+08:00">
-                2016-09-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="对n个数进行排序，时间复杂度O-n-空间复杂度O-1"><a href="#对n个数进行排序，时间复杂度O-n-空间复杂度O-1" class="headerlink" title="对n个数进行排序，时间复杂度O(n),空间复杂度O(1)"></a>对n个数进行排序，时间复杂度O(n),空间复杂度O(1)</h2><h3 id="一个算法题"><a href="#一个算法题" class="headerlink" title="一个算法题"></a>一个算法题</h3><p>转载的一个解释，暂时看懵了，先mark记录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">看上去似乎任何已知的算法都无法做到，如果谁做到了，那么所有的排序方法：QuickSort，ShellSort，HeapSort，BubbleSort等等等等，都可以扔掉了，还要这些算法干吗阿，呵呵。不过实际上，在数字范围有限制的情况下，是有一个这样的算法的，只需要用一个数组记录每个数字出现次数就可以了。</div><div class="line"></div><div class="line">假定你的数字范围在0到65535范围之内，定义一个数组count[65536]（这个空间是常量，和n无关，所以是O(1) )，初值全部为0。</div><div class="line">那么假设有下面这些数字：</div><div class="line">100</div><div class="line">200</div><div class="line">300</div><div class="line">119</div><div class="line">0</div><div class="line">6</div><div class="line">...</div><div class="line">那么对于每个这个数字，都做在count中记录一下：</div><div class="line">100 =&gt; count[100]++</div><div class="line">200 =&gt; count[200]++</div><div class="line">300 =&gt; count[300]++</div><div class="line">119 =&gt; count[119]++</div><div class="line">0 =&gt; count[0]++</div><div class="line">6 =&gt; count[6]++</div><div class="line">...</div><div class="line">最后，遍历一边所有这些数字就可得到0~65535每个数字的个数（在count数组中），然后再顺序遍历count数组，count[n] = m，则输出m个n，（比如说有count[3] = 2, 那么说明有2个数字3），依次输出，最后可得结果。第一次遍历是O(n)，第二次遍历是O(1)，为常量，所以最后的时间复杂度为O(n)，而空间复杂度为O(1)</div><div class="line">这个算法很简单，相信大家都会，只是这个题太过于变态了，一般会把面试者吓住</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
 
@@ -830,6 +698,148 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://23.106.148.149/other/other/复杂度算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sxw">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sxw">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/other/other/复杂度算法/" itemprop="url">时间复杂度O(n),空间复杂度O(1)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-19T00:00:00+08:00">
+                2016-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="对n个数进行排序，时间复杂度O-n-空间复杂度O-1"><a href="#对n个数进行排序，时间复杂度O-n-空间复杂度O-1" class="headerlink" title="对n个数进行排序，时间复杂度O(n),空间复杂度O(1)"></a>对n个数进行排序，时间复杂度O(n),空间复杂度O(1)</h2><h3 id="一个算法题"><a href="#一个算法题" class="headerlink" title="一个算法题"></a>一个算法题</h3><p>转载的一个解释，暂时看懵了，先mark记录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">看上去似乎任何已知的算法都无法做到，如果谁做到了，那么所有的排序方法：QuickSort，ShellSort，HeapSort，BubbleSort等等等等，都可以扔掉了，还要这些算法干吗阿，呵呵。不过实际上，在数字范围有限制的情况下，是有一个这样的算法的，只需要用一个数组记录每个数字出现次数就可以了。</div><div class="line"></div><div class="line">假定你的数字范围在0到65535范围之内，定义一个数组count[65536]（这个空间是常量，和n无关，所以是O(1) )，初值全部为0。</div><div class="line">那么假设有下面这些数字：</div><div class="line">100</div><div class="line">200</div><div class="line">300</div><div class="line">119</div><div class="line">0</div><div class="line">6</div><div class="line">...</div><div class="line">那么对于每个这个数字，都做在count中记录一下：</div><div class="line">100 =&gt; count[100]++</div><div class="line">200 =&gt; count[200]++</div><div class="line">300 =&gt; count[300]++</div><div class="line">119 =&gt; count[119]++</div><div class="line">0 =&gt; count[0]++</div><div class="line">6 =&gt; count[6]++</div><div class="line">...</div><div class="line">最后，遍历一边所有这些数字就可得到0~65535每个数字的个数（在count数组中），然后再顺序遍历count数组，count[n] = m，则输出m个n，（比如说有count[3] = 2, 那么说明有2个数字3），依次输出，最后可得结果。第一次遍历是O(n)，第二次遍历是O(1)，为常量，所以最后的时间复杂度为O(n)，而空间复杂度为O(1)</div><div class="line">这个算法很简单，相信大家都会，只是这个题太过于变态了，一般会把面试者吓住</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -927,7 +937,7 @@
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="about" target="_blank" title="QQ">
+                    <a href="http://sighttp.qq.com/msgrd?v=1&uin=319159534" target="_blank" title="QQ">
                       
                         <i class="fa fa-fw fa-globe"></i>QQ</a>
                   </span>
