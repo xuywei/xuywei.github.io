@@ -301,30 +301,6 @@
   </entry>
   
   <entry>
-    <title>Python教程(二)</title>
-    <link href="http://23.106.148.149/other/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
-    <id>http://23.106.148.149/other/python/Python教程(二)/</id>
-    <published>2016-09-18T16:00:00.000Z</published>
-    <updated>2017-09-27T05:37:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote><p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p></blockquote><a id="more"></a><h2 id="Python的函数"><a href="#Python的函数" class="headerlink" title="Python的函数"></a>Python的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class TestClass(object):</div><div class="line">    version = 1.9</div><div class="line">    def __init__(self,nm=&apos;xuwei&apos;):</div><div class="line">        self.name = nm</div><div class="line">        print(nm)</div><div class="line">    def showName(self):</div><div class="line">        print(self.name)</div><div class="line">    def showVersion(self):</div><div class="line">        print(self.version)</div><div class="line">myClass=TestClass()</div><div class="line">myClass.showName()</div><div class="line">myClass.showVersion()</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">sys.stdout.write(&apos;Hello World!\n&apos;)  # 代码的输出，调用了标准的write()方法</div><div class="line">print(sys.platform)  # 平台</div><div class="line">print(sys.version)  # python版本</div><div class="line"># help(dir)</div><div class="line">print(int(&apos;5&apos;))  # 5</div><div class="line">print(len(&apos;sdfas&apos;))  # 5</div><div class="line">print(list(range(5, 15, 2)))  # [5, 7, 9, 11, 13]</div><div class="line">print(str(3434))  # 3434</div><div class="line">print(type(56))  # &lt;class &apos;int&apos;&gt;</div><div class="line"># input(&apos;输入：&apos;)  # 输入：45</div><div class="line">print(dir(sys))  # sys模块中的所有属性</div><div class="line">print(dir)  # &lt;built-in function dir&gt;</div><div class="line">print(dir())  # 没有提供参数，就是显示全局变量的名字的列表print(type(dir))  # &lt;class &apos;builtin_function_or_method&apos;&gt;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;函数的5类参数&quot;&gt;&lt;a href=&quot;#函数的5类参数&quot; class=&quot;headerlink&quot; title=&quot;函数的5类参数&quot;&gt;&lt;/a&gt;函数的5类参数&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="other" scheme="http://23.106.148.149/categories/other/"/>
-    
-    
-      <category term="Python函数" scheme="http://23.106.148.149/tags/Python%E5%87%BD%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Python教程(一)</title>
     <link href="http://23.106.148.149/other/python/Python%E6%95%99%E7%A8%8B(%E4%B8%80)/"/>
     <id>http://23.106.148.149/other/python/Python教程(一)/</id>
@@ -348,6 +324,30 @@
     
     
       <category term="Python入门语法" scheme="http://23.106.148.149/tags/Python%E5%85%A5%E9%97%A8%E8%AF%AD%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python教程(二)</title>
+    <link href="http://23.106.148.149/other/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
+    <id>http://23.106.148.149/other/python/Python教程(二)/</id>
+    <published>2016-09-18T16:00:00.000Z</published>
+    <updated>2017-09-27T05:37:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote><p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p></blockquote><a id="more"></a><h2 id="Python的函数"><a href="#Python的函数" class="headerlink" title="Python的函数"></a>Python的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class TestClass(object):</div><div class="line">    version = 1.9</div><div class="line">    def __init__(self,nm=&apos;xuwei&apos;):</div><div class="line">        self.name = nm</div><div class="line">        print(nm)</div><div class="line">    def showName(self):</div><div class="line">        print(self.name)</div><div class="line">    def showVersion(self):</div><div class="line">        print(self.version)</div><div class="line">myClass=TestClass()</div><div class="line">myClass.showName()</div><div class="line">myClass.showVersion()</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">sys.stdout.write(&apos;Hello World!\n&apos;)  # 代码的输出，调用了标准的write()方法</div><div class="line">print(sys.platform)  # 平台</div><div class="line">print(sys.version)  # python版本</div><div class="line"># help(dir)</div><div class="line">print(int(&apos;5&apos;))  # 5</div><div class="line">print(len(&apos;sdfas&apos;))  # 5</div><div class="line">print(list(range(5, 15, 2)))  # [5, 7, 9, 11, 13]</div><div class="line">print(str(3434))  # 3434</div><div class="line">print(type(56))  # &lt;class &apos;int&apos;&gt;</div><div class="line"># input(&apos;输入：&apos;)  # 输入：45</div><div class="line">print(dir(sys))  # sys模块中的所有属性</div><div class="line">print(dir)  # &lt;built-in function dir&gt;</div><div class="line">print(dir())  # 没有提供参数，就是显示全局变量的名字的列表print(type(dir))  # &lt;class &apos;builtin_function_or_method&apos;&gt;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;函数的5类参数&quot;&gt;&lt;a href=&quot;#函数的5类参数&quot; class=&quot;headerlink&quot; title=&quot;函数的5类参数&quot;&gt;&lt;/a&gt;函数的5类参数&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="other" scheme="http://23.106.148.149/categories/other/"/>
+    
+    
+      <category term="Python函数" scheme="http://23.106.148.149/tags/Python%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   

@@ -46,19 +46,19 @@
 
     
   <url>
-    <loc>http://23.106.148.149/other/other/MarkDowm%E8%AF%AD%E6%B3%95/</loc>
+    <loc>http://23.106.148.149/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/design_mode/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     <data>
         <display>
-        <title>MarkDowm语法</title>
-        <pubTime>2016-09-21T02:20:33.000Z</pubTime>
+        <title>单例设计模式</title>
+        <pubTime>2016-09-21T01:46:33.000Z</pubTime>
         
-        <tag>MarkDown语法</tag>
+        <tag>单例模式</tag>
          
          
            
              
-              <breadCrumb title="other" url="http://23.106.148.149/categories/other/"/>
+              <breadCrumb title="设计模式" url="http://23.106.148.149/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
           
         </display>
     </data>
@@ -166,19 +166,19 @@
 
     
   <url>
-    <loc>http://23.106.148.149/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/design_mode/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>http://23.106.148.149/android/android/app%E6%B2%89%E6%B5%B8%E5%BC%8F/</loc>
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     <data>
         <display>
-        <title>单例设计模式</title>
-        <pubTime>2016-09-21T01:46:33.000Z</pubTime>
+        <title>app沉浸式</title>
+        <pubTime>2016-09-19T16:00:00.000Z</pubTime>
         
-        <tag>单例模式</tag>
+        <tag>沉浸</tag>
          
          
            
              
-              <breadCrumb title="设计模式" url="http://23.106.148.149/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+              <breadCrumb title="android" url="http://23.106.148.149/categories/android/"/>
           
         </display>
     </data>
@@ -205,20 +205,21 @@
     </url>
 
     
+    
   <url>
-    <loc>http://23.106.148.149/android/android/app%E6%B2%89%E6%B5%B8%E5%BC%8F/</loc>
+    <loc>http://23.106.148.149/other/python/Python%E6%95%99%E7%A8%8B(%E4%B8%80)/</loc>
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     <data>
         <display>
-        <title>app沉浸式</title>
-        <pubTime>2016-09-19T16:00:00.000Z</pubTime>
+        <title>Python教程(一)</title>
+        <pubTime>2016-09-18T16:00:00.000Z</pubTime>
         
-        <tag>沉浸</tag>
+        <tag>Python入门语法</tag>
          
          
            
              
-              <breadCrumb title="android" url="http://23.106.148.149/categories/android/"/>
+              <breadCrumb title="other" url="http://23.106.148.149/categories/other/"/>
           
         </display>
     </data>
@@ -234,26 +235,6 @@
         <pubTime>2016-09-18T16:00:00.000Z</pubTime>
         
         <tag>Python函数</tag>
-         
-         
-           
-             
-              <breadCrumb title="other" url="http://23.106.148.149/categories/other/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://23.106.148.149/other/python/Python%E6%95%99%E7%A8%8B(%E4%B8%80)/</loc>
-    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
-    <data>
-        <display>
-        <title>Python教程(一)</title>
-        <pubTime>2016-09-18T16:00:00.000Z</pubTime>
-        
-        <tag>Python入门语法</tag>
          
          
            
@@ -285,4 +266,23 @@
 
     
     
+  <url>
+    <loc>http://23.106.148.149/other/other/MarkDowm%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>MarkDowm语法</title>
+        <pubTime>2016-09-21T02:20:33.000Z</pubTime>
+        
+        <tag>MarkDown语法</tag>
+         
+         
+           
+             
+              <breadCrumb title="other" url="http://23.106.148.149/categories/other/"/>
+          
+        </display>
+    </data>
+    </url>
+
 </urlset>
