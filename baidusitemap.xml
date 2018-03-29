@@ -132,26 +132,6 @@
 
     
   <url>
-    <loc>http://23.106.148.149/mysql/mysql/mysql%E5%AE%89%E8%A3%85/</loc>
-    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
-    <data>
-        <display>
-        <title>mysql常用命令</title>
-        <pubTime>2016-10-14T05:33:33.000Z</pubTime>
-        
-        <tag>mysql</tag>
-         
-         
-           
-             
-              <breadCrumb title="mysql" url="http://23.106.148.149/categories/mysql/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://23.106.148.149/other/other/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     <data>
@@ -165,46 +145,6 @@
            
              
               <breadCrumb title="other" url="http://23.106.148.149/categories/other/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</loc>
-    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
-    <data>
-        <display>
-        <title>git疑难杂症总结</title>
-        <pubTime>2016-09-21T01:52:33.000Z</pubTime>
-        
-        <tag>git疑难杂症</tag>
-         
-         
-           
-             
-              <breadCrumb title="Git" url="http://23.106.148.149/categories/Git/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%BA%8C)/</loc>
-    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
-    <data>
-        <display>
-        <title>git教程(二)</title>
-        <pubTime>2016-09-21T01:52:33.000Z</pubTime>
-        
-        <tag>git本地提交</tag>
-         
-         
-           
-             
-              <breadCrumb title="Git" url="http://23.106.148.149/categories/Git/"/>
           
         </display>
     </data>
@@ -232,6 +172,46 @@
 
     
   <url>
+    <loc>http://23.106.148.149/other/other/MarkDowm%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>MarkDowm语法</title>
+        <pubTime>2016-09-21T02:20:33.000Z</pubTime>
+        
+        <tag>MarkDown语法</tag>
+         
+         
+           
+             
+              <breadCrumb title="other" url="http://23.106.148.149/categories/other/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://23.106.148.149/mysql/mysql/mysql%E5%AE%89%E8%A3%85/</loc>
+    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>mysql常用命令</title>
+        <pubTime>2016-10-14T05:33:33.000Z</pubTime>
+        
+        <tag>mysql</tag>
+         
+         
+           
+             
+              <breadCrumb title="mysql" url="http://23.106.148.149/categories/mysql/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%80)/</loc>
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     <data>
@@ -240,6 +220,26 @@
         <pubTime>2016-09-21T01:49:33.000Z</pubTime>
         
         <tag>git安装初始化配置</tag>
+         
+         
+           
+             
+              <breadCrumb title="Git" url="http://23.106.148.149/categories/Git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</loc>
+    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>git疑难杂症总结</title>
+        <pubTime>2016-09-21T01:52:33.000Z</pubTime>
+        
+        <tag>git疑难杂症</tag>
          
          
            
@@ -292,19 +292,19 @@
 
     
   <url>
-    <loc>http://23.106.148.149/other/other/MarkDowm%E8%AF%AD%E6%B3%95/</loc>
+    <loc>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%BA%8C)/</loc>
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     <data>
         <display>
-        <title>MarkDowm语法</title>
-        <pubTime>2016-09-21T02:20:33.000Z</pubTime>
+        <title>git教程(二)</title>
+        <pubTime>2016-09-21T01:52:33.000Z</pubTime>
         
-        <tag>MarkDown语法</tag>
+        <tag>git本地提交</tag>
          
          
            
              
-              <breadCrumb title="other" url="http://23.106.148.149/categories/other/"/>
+              <breadCrumb title="Git" url="http://23.106.148.149/categories/Git/"/>
           
         </display>
     </data>
