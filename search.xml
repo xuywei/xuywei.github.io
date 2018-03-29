@@ -157,41 +157,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[git教程(二)]]></title>
-      <url>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%BA%8C)/</url>
-      <content type="html"><![CDATA[<h2 id="git的本地操作"><a href="#git的本地操作" class="headerlink" title="git的本地操作"></a>git的本地操作</h2><p>首先先提出一个仓库的概念，git的仓库概念就是处处都是仓库，所以我可以轻易的clone本地的一些用git管理起来的文件夹（也就是书面语仓库），这里特别提一下服务器端的仓库，当然你可以像其他基本仓库一样，但是这样也就没有了服务器的优势（不可视，就比如linux服务器全部以无界面命令来进行操作，这样也就间接的避免了好多界面话导致的木马病毒的侵入），所以就有了裸仓库一说。服务器的git管理的最好是一个裸仓库。你也不需要在服务器端进行文件的一系列操作。万一误删了肿么办，死都不知道咋死的。。。<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/1654122-be60690475a04540.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="两种仓库概念仓库"></p>
-<h3 id="在github上进行仓库的实战"><a href="#在github上进行仓库的实战" class="headerlink" title="在github上进行仓库的实战"></a>在github上进行仓库的实战</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-ec43b579d93a59d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>README文件初学者建议不选。这个文件就是项目的说明文档，也就是你可以在里边写项目描述啥的，语法支持markdown如有需要请移步我的markdown文章，<a href="http://www.jianshu.com/p/76a747786b04" target="_blank" rel="external">MarkDown语法</a></p>
-<p>创建仓库之后你会看到你的仓库地址，就是https协议地址：</p>
-<blockquote>
-<p><a href="https://github.com/***" target="_blank" rel="external">https://github.com/***</a> </p>
-</blockquote>
-<p>还有ssh协议地址 git@github.com/<em>*</em><br>不同的协议在你和仓库交互的时候会有不同的形式，前面我也说了，https你要输入github的用户名密码验证你自己的权限，ssh就是用之前生成和配置的rsa来验证，简化了输入账号密码的繁琐，而且安全了不止多少倍。<br><img src="http://upload-images.jianshu.io/upload_images/1654122-6a23bff0885955e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不同协议下的仓库地址"><br>好了，远程仓库 我们利用github这个网站创建好了，下面该提交咱们的代码到这个仓库了。</p>
-<p>##git本地仓库创建、增加远程仓库依赖、提交、同步代码到远程和本地<br>这里咱们用一个很好玩的操作练习一下，这样大家都知道git远程仓库的本来面目了，你可以随便玩一玩，是不是感觉其实git也没什么高端的呢，哈哈</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone **************.git --depth=1克隆深度1</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/1654122-b0c4a87b9cf3108d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="本地仓库模拟远程仓库"><br>从上面图中可以看到cp命令(copy)，rm(remove)，cd(come into dir)<br>git add .将工作区中的所有文件跟踪进暂存区，git commit -m “”将暂存区的文件提交到仓库区，git status查看3大区的状态(绿色代表暂存区和仓库区没同步，红色代表工作区和暂存区没同步，像上边nothing to commit，working directory clean就是代表3大区全部同步完毕)只有全部同步完成后才能进行pull和push操作，git pull origin master将名字为origin的远程仓库中的名字为master的分支上的文件同步到本地工作区中，如果文件不存在冲突情况下，pull操作也会进行3大区的同步工作，特别情况下冲突了，无法进行同步，你就要自己同步了，先git status看一下哪个文件冲突了，修改后git add .和git commit -m “”工作区干净了之后就可以git push origin master这里我就不解释origin和master了，和pull一样，现在你也可以试一试了，不要怕错，git会永远保存你提交到仓库里的文件，每一次commit都会记录到git提交历史中，你可以进行回退到固定版本，查看历史提交的任何信息(记住是任何，所以不要怕丢文件，当然你只add不commit是不行的，这里你的电脑不挂就会永久保存，当然你不可能随时带着你的电脑了，可以将本地仓库文件push到远程仓库，除非放仓库文件的服务器仓库挂了，你的文件可以永久保存，并实时clone下来查看任何信息)</p>
-<p>##本篇结语</p>
-<blockquote>
-<p>流程通俗讲：文件—git管理版本–&gt;保存在你电脑上–提交—&gt;保&gt;存到git的版本中，就是.git文件夹中，我就不带你们看了，怕你们迷-&gt;–push–&gt;远程服务器文件，当然.git文件夹也是一起push过去的，&gt;所以每次clone都是带一切版本历史纪录的</p>
-</blockquote>
-<p>所以其实也就是一个被git管理每一次文件版本的文件在本地电脑和服务器电脑上互相同步数据。<br>语言组织好费脑细胞啊，请各位码友别介意哈^_^</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Git </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> git本地提交 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[git疑难杂症总结]]></title>
       <url>http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</url>
       <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p>
@@ -241,6 +206,41 @@
         <tags>
             
             <tag> git同步远程仓库 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[git教程(二)]]></title>
+      <url>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%BA%8C)/</url>
+      <content type="html"><![CDATA[<h2 id="git的本地操作"><a href="#git的本地操作" class="headerlink" title="git的本地操作"></a>git的本地操作</h2><p>首先先提出一个仓库的概念，git的仓库概念就是处处都是仓库，所以我可以轻易的clone本地的一些用git管理起来的文件夹（也就是书面语仓库），这里特别提一下服务器端的仓库，当然你可以像其他基本仓库一样，但是这样也就没有了服务器的优势（不可视，就比如linux服务器全部以无界面命令来进行操作，这样也就间接的避免了好多界面话导致的木马病毒的侵入），所以就有了裸仓库一说。服务器的git管理的最好是一个裸仓库。你也不需要在服务器端进行文件的一系列操作。万一误删了肿么办，死都不知道咋死的。。。<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/1654122-be60690475a04540.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="两种仓库概念仓库"></p>
+<h3 id="在github上进行仓库的实战"><a href="#在github上进行仓库的实战" class="headerlink" title="在github上进行仓库的实战"></a>在github上进行仓库的实战</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-ec43b579d93a59d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>README文件初学者建议不选。这个文件就是项目的说明文档，也就是你可以在里边写项目描述啥的，语法支持markdown如有需要请移步我的markdown文章，<a href="http://www.jianshu.com/p/76a747786b04" target="_blank" rel="external">MarkDown语法</a></p>
+<p>创建仓库之后你会看到你的仓库地址，就是https协议地址：</p>
+<blockquote>
+<p><a href="https://github.com/***" target="_blank" rel="external">https://github.com/***</a> </p>
+</blockquote>
+<p>还有ssh协议地址 git@github.com/<em>*</em><br>不同的协议在你和仓库交互的时候会有不同的形式，前面我也说了，https你要输入github的用户名密码验证你自己的权限，ssh就是用之前生成和配置的rsa来验证，简化了输入账号密码的繁琐，而且安全了不止多少倍。<br><img src="http://upload-images.jianshu.io/upload_images/1654122-6a23bff0885955e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不同协议下的仓库地址"><br>好了，远程仓库 我们利用github这个网站创建好了，下面该提交咱们的代码到这个仓库了。</p>
+<p>##git本地仓库创建、增加远程仓库依赖、提交、同步代码到远程和本地<br>这里咱们用一个很好玩的操作练习一下，这样大家都知道git远程仓库的本来面目了，你可以随便玩一玩，是不是感觉其实git也没什么高端的呢，哈哈</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone **************.git --depth=1克隆深度1</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1654122-b0c4a87b9cf3108d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="本地仓库模拟远程仓库"><br>从上面图中可以看到cp命令(copy)，rm(remove)，cd(come into dir)<br>git add .将工作区中的所有文件跟踪进暂存区，git commit -m “”将暂存区的文件提交到仓库区，git status查看3大区的状态(绿色代表暂存区和仓库区没同步，红色代表工作区和暂存区没同步，像上边nothing to commit，working directory clean就是代表3大区全部同步完毕)只有全部同步完成后才能进行pull和push操作，git pull origin master将名字为origin的远程仓库中的名字为master的分支上的文件同步到本地工作区中，如果文件不存在冲突情况下，pull操作也会进行3大区的同步工作，特别情况下冲突了，无法进行同步，你就要自己同步了，先git status看一下哪个文件冲突了，修改后git add .和git commit -m “”工作区干净了之后就可以git push origin master这里我就不解释origin和master了，和pull一样，现在你也可以试一试了，不要怕错，git会永远保存你提交到仓库里的文件，每一次commit都会记录到git提交历史中，你可以进行回退到固定版本，查看历史提交的任何信息(记住是任何，所以不要怕丢文件，当然你只add不commit是不行的，这里你的电脑不挂就会永久保存，当然你不可能随时带着你的电脑了，可以将本地仓库文件push到远程仓库，除非放仓库文件的服务器仓库挂了，你的文件可以永久保存，并实时clone下来查看任何信息)</p>
+<p>##本篇结语</p>
+<blockquote>
+<p>流程通俗讲：文件—git管理版本–&gt;保存在你电脑上–提交—&gt;保&gt;存到git的版本中，就是.git文件夹中，我就不带你们看了，怕你们迷-&gt;–push–&gt;远程服务器文件，当然.git文件夹也是一起push过去的，&gt;所以每次clone都是带一切版本历史纪录的</p>
+</blockquote>
+<p>所以其实也就是一个被git管理每一次文件版本的文件在本地电脑和服务器电脑上互相同步数据。<br>语言组织好费脑细胞啊，请各位码友别介意哈^_^</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Git </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> git本地提交 </tag>
             
         </tags>
         
@@ -368,34 +368,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[pip相关]]></title>
-      <url>http://23.106.148.149/python/python/pip%E7%9B%B8%E5%85%B3/</url>
-      <content type="html"><![CDATA[<h2 id="pip更新"><a href="#pip更新" class="headerlink" title="pip更新"></a>pip更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install --upgrade pip</div><div class="line">python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="win10中python2和python3并存，安装模块"><a href="#win10中python2和python3并存，安装模块" class="headerlink" title="win10中python2和python3并存，安装模块"></a>win10中python2和python3并存，安装模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install xxx</div><div class="line">python3 -m pip install xxx</div></pre></td></tr></table></figure>
-<h2 id="windows上python无法安装lxml"><a href="#windows上python无法安装lxml" class="headerlink" title="windows上python无法安装lxml"></a>windows上python无法安装lxml</h2><h3 id="下载模块"><a href="#下载模块" class="headerlink" title="下载模块"></a>下载模块</h3><p><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml" target="_blank" rel="external">lxml</a>，从这里找到对应的whl文件下载</p>
-<h3 id="安装wheel"><a href="#安装wheel" class="headerlink" title="安装wheel"></a>安装wheel</h3><p>pip3 install wheel</p>
-<h3 id="安装下载的模块"><a href="#安装下载的模块" class="headerlink" title="安装下载的模块"></a>安装下载的模块</h3><p>安装lxml<br>pip3 install 下载的对应模块路径</p>
-]]></content>
-      
-        <categories>
-            
-            <category> python </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> python </tag>
-            
-            <tag> pip </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Python教程(二)]]></title>
       <url>http://23.106.148.149/python/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/</url>
       <content type="html"><![CDATA[<h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote>
@@ -496,6 +468,34 @@
             <tag> Hexo </tag>
             
             <tag> node.js </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[pip相关]]></title>
+      <url>http://23.106.148.149/python/python/pip%E7%9B%B8%E5%85%B3/</url>
+      <content type="html"><![CDATA[<h2 id="pip更新"><a href="#pip更新" class="headerlink" title="pip更新"></a>pip更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install --upgrade pip</div><div class="line">python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="win10中python2和python3并存，安装模块"><a href="#win10中python2和python3并存，安装模块" class="headerlink" title="win10中python2和python3并存，安装模块"></a>win10中python2和python3并存，安装模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install xxx</div><div class="line">python3 -m pip install xxx</div></pre></td></tr></table></figure>
+<h2 id="windows上python无法安装lxml"><a href="#windows上python无法安装lxml" class="headerlink" title="windows上python无法安装lxml"></a>windows上python无法安装lxml</h2><h3 id="下载模块"><a href="#下载模块" class="headerlink" title="下载模块"></a>下载模块</h3><p><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml" target="_blank" rel="external">lxml</a>，从这里找到对应的whl文件下载</p>
+<h3 id="安装wheel"><a href="#安装wheel" class="headerlink" title="安装wheel"></a>安装wheel</h3><p>pip3 install wheel</p>
+<h3 id="安装下载的模块"><a href="#安装下载的模块" class="headerlink" title="安装下载的模块"></a>安装下载的模块</h3><p>安装lxml<br>pip3 install 下载的对应模块路径</p>
+]]></content>
+      
+        <categories>
+            
+            <category> python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> pip </tag>
             
         </tags>
         
