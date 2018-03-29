@@ -16,14 +16,14 @@
   </url>
   
   <url>
-    <loc>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%80)/</loc>
+    <loc>http://23.106.148.149/android/android/app%E6%B2%89%E6%B5%B8%E5%BC%8F/</loc>
     
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://23.106.148.149/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/design_mode/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%80)/</loc>
     
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     
@@ -37,13 +37,6 @@
   </url>
   
   <url>
-    <loc>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%BA%8C)/</loc>
-    
-    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</loc>
     
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
@@ -51,14 +44,21 @@
   </url>
   
   <url>
-    <loc>http://23.106.148.149/mysql/mysql/mysql%E5%AE%89%E8%A3%85/</loc>
+    <loc>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%BA%8C)/</loc>
     
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://23.106.148.149/android/android/app%E6%B2%89%E6%B5%B8%E5%BC%8F/</loc>
+    <loc>http://23.106.148.149/other/other/MarkDowm%E8%AF%AD%E6%B3%95/</loc>
+    
+    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://23.106.148.149/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/design_mode/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
     
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     
@@ -66,13 +66,6 @@
   
   <url>
     <loc>http://23.106.148.149/other/other/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%AE%97%E6%B3%95/</loc>
-    
-    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://23.106.148.149/about/index.html</loc>
     
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     
@@ -100,6 +93,13 @@
   </url>
   
   <url>
+    <loc>http://23.106.148.149/about/index.html</loc>
+    
+    <lastmod>2017-09-27T05:37:36.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://23.106.148.149/404.html</loc>
     
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
@@ -107,7 +107,7 @@
   </url>
   
   <url>
-    <loc>http://23.106.148.149/other/other/MarkDowm%E8%AF%AD%E6%B3%95/</loc>
+    <loc>http://23.106.148.149/mysql/mysql/mysql%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2017-09-27T05:37:36.000Z</lastmod>
     
