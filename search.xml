@@ -157,13 +157,18 @@
     </entry>
     
     <entry>
-      <title><![CDATA[git疑难杂症总结]]></title>
-      <url>http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</url>
-      <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure>
-<h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p>
-<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure>
-<h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>
+      <title><![CDATA[git教程(三)]]></title>
+      <url>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%89)/</url>
+      <content type="html"><![CDATA[<h2 id="git的远程和本地的同步交互操作"><a href="#git的远程和本地的同步交互操作" class="headerlink" title="git的远程和本地的同步交互操作"></a>git的远程和本地的同步交互操作</h2><blockquote>
+<p>当本地的文件被git管理后，我们之前讲过了一些本地的操作，主要都是在工作区和暂存区进行操作，但是我们不能只在本地玩啊是不是，这不，我们下面就讲同步你的本地代码到服务器上去，也叫远程仓库。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="再贴一下git的本地操作"><a href="#再贴一下git的本地操作" class="headerlink" title="再贴一下git的本地操作"></a>再贴一下git的本地操作</h2><p><img src="http://upload-images.jianshu.io/upload_images/1654122-d7fe4a18bdef896d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<blockquote>
+<p>下面要在服务器里创建一个仓库，我们这里没有自己的，就用第三方的吧，这里自己百度一下好吧<del>~</del>~~~</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git remote add 远程仓库的名字 远程地址  # 对应的中文对应你的仓库名字和地址，地址是你创建仓库之后给你的唯一地址，名字的话，默认是origin，当然你你可以自己起名，比如baby哈哈</div><div class="line">git pull origin master</div><div class="line">git push origin master</div><div class="line">git push -u origin master#以后提交都是origin master，以后就只打git push就行了，pull同理</div><div class="line">git pull -u origin master</div></pre></td></tr></table></figure>
+<p>ok了，去远程仓库看一下，代码都同步好了。</p>
 ]]></content>
       
         <categories>
@@ -175,7 +180,7 @@
         
         <tags>
             
-            <tag> git疑难杂症 </tag>
+            <tag> git同步远程仓库 </tag>
             
         </tags>
         
@@ -217,18 +222,13 @@
     </entry>
     
     <entry>
-      <title><![CDATA[git教程(三)]]></title>
-      <url>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%89)/</url>
-      <content type="html"><![CDATA[<h2 id="git的远程和本地的同步交互操作"><a href="#git的远程和本地的同步交互操作" class="headerlink" title="git的远程和本地的同步交互操作"></a>git的远程和本地的同步交互操作</h2><blockquote>
-<p>当本地的文件被git管理后，我们之前讲过了一些本地的操作，主要都是在工作区和暂存区进行操作，但是我们不能只在本地玩啊是不是，这不，我们下面就讲同步你的本地代码到服务器上去，也叫远程仓库。</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="再贴一下git的本地操作"><a href="#再贴一下git的本地操作" class="headerlink" title="再贴一下git的本地操作"></a>再贴一下git的本地操作</h2><p><img src="http://upload-images.jianshu.io/upload_images/1654122-d7fe4a18bdef896d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<blockquote>
-<p>下面要在服务器里创建一个仓库，我们这里没有自己的，就用第三方的吧，这里自己百度一下好吧<del>~</del>~~~</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git remote add 远程仓库的名字 远程地址  # 对应的中文对应你的仓库名字和地址，地址是你创建仓库之后给你的唯一地址，名字的话，默认是origin，当然你你可以自己起名，比如baby哈哈</div><div class="line">git pull origin master</div><div class="line">git push origin master</div><div class="line">git push -u origin master#以后提交都是origin master，以后就只打git push就行了，pull同理</div><div class="line">git pull -u origin master</div></pre></td></tr></table></figure>
-<p>ok了，去远程仓库看一下，代码都同步好了。</p>
+      <title><![CDATA[git疑难杂症总结]]></title>
+      <url>http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</url>
+      <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure>
+<h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p>
+<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure>
+<h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>
 ]]></content>
       
         <categories>
@@ -240,7 +240,7 @@
         
         <tags>
             
-            <tag> git同步远程仓库 </tag>
+            <tag> git疑难杂症 </tag>
             
         </tags>
         
@@ -368,34 +368,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[pip相关]]></title>
-      <url>http://23.106.148.149/python/python/pip%E7%9B%B8%E5%85%B3/</url>
-      <content type="html"><![CDATA[<h2 id="pip更新"><a href="#pip更新" class="headerlink" title="pip更新"></a>pip更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install --upgrade pip</div><div class="line">python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="win10中python2和python3并存，安装模块"><a href="#win10中python2和python3并存，安装模块" class="headerlink" title="win10中python2和python3并存，安装模块"></a>win10中python2和python3并存，安装模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install xxx</div><div class="line">python3 -m pip install xxx</div></pre></td></tr></table></figure>
-<h2 id="windows上python无法安装lxml"><a href="#windows上python无法安装lxml" class="headerlink" title="windows上python无法安装lxml"></a>windows上python无法安装lxml</h2><h3 id="下载模块"><a href="#下载模块" class="headerlink" title="下载模块"></a>下载模块</h3><p><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml" target="_blank" rel="external">lxml</a>，从这里找到对应的whl文件下载</p>
-<h3 id="安装wheel"><a href="#安装wheel" class="headerlink" title="安装wheel"></a>安装wheel</h3><p>pip3 install wheel</p>
-<h3 id="安装下载的模块"><a href="#安装下载的模块" class="headerlink" title="安装下载的模块"></a>安装下载的模块</h3><p>安装lxml<br>pip3 install 下载的对应模块路径</p>
-]]></content>
-      
-        <categories>
-            
-            <category> python </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> python </tag>
-            
-            <tag> pip </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Hexo+Github搭建自己的博客]]></title>
       <url>http://23.106.148.149/other/other/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
       <content type="html"><![CDATA[<h2 id="准备工具node-js和git"><a href="#准备工具node-js和git" class="headerlink" title="准备工具node.js和git"></a>准备工具node.js和git</h2><blockquote>
@@ -511,6 +483,34 @@
         <tags>
             
             <tag> python </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[pip相关]]></title>
+      <url>http://23.106.148.149/python/python/pip%E7%9B%B8%E5%85%B3/</url>
+      <content type="html"><![CDATA[<h2 id="pip更新"><a href="#pip更新" class="headerlink" title="pip更新"></a>pip更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install --upgrade pip</div><div class="line">python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="win10中python2和python3并存，安装模块"><a href="#win10中python2和python3并存，安装模块" class="headerlink" title="win10中python2和python3并存，安装模块"></a>win10中python2和python3并存，安装模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install xxx</div><div class="line">python3 -m pip install xxx</div></pre></td></tr></table></figure>
+<h2 id="windows上python无法安装lxml"><a href="#windows上python无法安装lxml" class="headerlink" title="windows上python无法安装lxml"></a>windows上python无法安装lxml</h2><h3 id="下载模块"><a href="#下载模块" class="headerlink" title="下载模块"></a>下载模块</h3><p><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml" target="_blank" rel="external">lxml</a>，从这里找到对应的whl文件下载</p>
+<h3 id="安装wheel"><a href="#安装wheel" class="headerlink" title="安装wheel"></a>安装wheel</h3><p>pip3 install wheel</p>
+<h3 id="安装下载的模块"><a href="#安装下载的模块" class="headerlink" title="安装下载的模块"></a>安装下载的模块</h3><p>安装lxml<br>pip3 install 下载的对应模块路径</p>
+]]></content>
+      
+        <categories>
+            
+            <category> python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> pip </tag>
             
         </tags>
         
