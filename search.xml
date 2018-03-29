@@ -157,36 +157,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[git教程(三)]]></title>
-      <url>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%89)/</url>
-      <content type="html"><![CDATA[<h2 id="git的远程和本地的同步交互操作"><a href="#git的远程和本地的同步交互操作" class="headerlink" title="git的远程和本地的同步交互操作"></a>git的远程和本地的同步交互操作</h2><blockquote>
-<p>当本地的文件被git管理后，我们之前讲过了一些本地的操作，主要都是在工作区和暂存区进行操作，但是我们不能只在本地玩啊是不是，这不，我们下面就讲同步你的本地代码到服务器上去，也叫远程仓库。</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="再贴一下git的本地操作"><a href="#再贴一下git的本地操作" class="headerlink" title="再贴一下git的本地操作"></a>再贴一下git的本地操作</h2><p><img src="http://upload-images.jianshu.io/upload_images/1654122-d7fe4a18bdef896d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<blockquote>
-<p>下面要在服务器里创建一个仓库，我们这里没有自己的，就用第三方的吧，这里自己百度一下好吧<del>~</del>~~~</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git remote add 远程仓库的名字 远程地址  # 对应的中文对应你的仓库名字和地址，地址是你创建仓库之后给你的唯一地址，名字的话，默认是origin，当然你你可以自己起名，比如baby哈哈</div><div class="line">git pull origin master</div><div class="line">git push origin master</div><div class="line">git push -u origin master#以后提交都是origin master，以后就只打git push就行了，pull同理</div><div class="line">git pull -u origin master</div></pre></td></tr></table></figure>
-<p>ok了，去远程仓库看一下，代码都同步好了。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Git </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> git同步远程仓库 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[git教程(二)]]></title>
       <url>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%BA%8C)/</url>
       <content type="html"><![CDATA[<h2 id="git的本地操作"><a href="#git的本地操作" class="headerlink" title="git的本地操作"></a>git的本地操作</h2><p>首先先提出一个仓库的概念，git的仓库概念就是处处都是仓库，所以我可以轻易的clone本地的一些用git管理起来的文件夹（也就是书面语仓库），这里特别提一下服务器端的仓库，当然你可以像其他基本仓库一样，但是这样也就没有了服务器的优势（不可视，就比如linux服务器全部以无界面命令来进行操作，这样也就间接的避免了好多界面话导致的木马病毒的侵入），所以就有了裸仓库一说。服务器的git管理的最好是一个裸仓库。你也不需要在服务器端进行文件的一系列操作。万一误删了肿么办，死都不知道咋死的。。。<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/1654122-be60690475a04540.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="两种仓库概念仓库"></p>
@@ -241,6 +211,36 @@
         <tags>
             
             <tag> git疑难杂症 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[git教程(三)]]></title>
+      <url>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%89)/</url>
+      <content type="html"><![CDATA[<h2 id="git的远程和本地的同步交互操作"><a href="#git的远程和本地的同步交互操作" class="headerlink" title="git的远程和本地的同步交互操作"></a>git的远程和本地的同步交互操作</h2><blockquote>
+<p>当本地的文件被git管理后，我们之前讲过了一些本地的操作，主要都是在工作区和暂存区进行操作，但是我们不能只在本地玩啊是不是，这不，我们下面就讲同步你的本地代码到服务器上去，也叫远程仓库。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="再贴一下git的本地操作"><a href="#再贴一下git的本地操作" class="headerlink" title="再贴一下git的本地操作"></a>再贴一下git的本地操作</h2><p><img src="http://upload-images.jianshu.io/upload_images/1654122-d7fe4a18bdef896d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<blockquote>
+<p>下面要在服务器里创建一个仓库，我们这里没有自己的，就用第三方的吧，这里自己百度一下好吧<del>~</del>~~~</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git remote add 远程仓库的名字 远程地址  # 对应的中文对应你的仓库名字和地址，地址是你创建仓库之后给你的唯一地址，名字的话，默认是origin，当然你你可以自己起名，比如baby哈哈</div><div class="line">git pull origin master</div><div class="line">git push origin master</div><div class="line">git push -u origin master#以后提交都是origin master，以后就只打git push就行了，pull同理</div><div class="line">git pull -u origin master</div></pre></td></tr></table></figure>
+<p>ok了，去远程仓库看一下，代码都同步好了。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Git </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> git同步远程仓库 </tag>
             
         </tags>
         
@@ -535,7 +535,7 @@
         
         <tags>
             
-            <tag> Python </tag>
+            <tag> python </tag>
             
         </tags>
         
