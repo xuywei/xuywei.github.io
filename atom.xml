@@ -88,6 +88,28 @@
   </entry>
   
   <entry>
+    <title>git疑难杂症总结</title>
+    <link href="http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
+    <id>http://23.106.148.149/Git/git/git疑难杂症/</id>
+    <published>2016-09-21T01:52:33.000Z</published>
+    <updated>2017-09-27T05:37:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure><h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure><h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;git远程仓库同步-历史提交不同导致错误&quot;&gt;&lt;a href=&quot;#git远程仓库同步-历史提交不同导致错误&quot; class=&quot;headerlink&quot; title=&quot;git远程仓库同步,历史提交不同导致错误&quot;&gt;&lt;/a&gt;git远程仓库同步,历史提交不同导致错误&lt;/h2&gt;&lt;h3 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;问题&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
+    
+    
+      <category term="git疑难杂症" scheme="http://23.106.148.149/tags/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
+    
+  </entry>
+  
+  <entry>
     <title>git教程(二)</title>
     <link href="http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
     <id>http://23.106.148.149/Git/git/git教程(二)/</id>
@@ -130,28 +152,6 @@
     
     
       <category term="git同步远程仓库" scheme="http://23.106.148.149/tags/git%E5%90%8C%E6%AD%A5%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git疑难杂症总结</title>
-    <link href="http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
-    <id>http://23.106.148.149/Git/git/git疑难杂症/</id>
-    <published>2016-09-21T01:52:33.000Z</published>
-    <updated>2017-09-27T05:37:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure><h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure><h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;git远程仓库同步-历史提交不同导致错误&quot;&gt;&lt;a href=&quot;#git远程仓库同步-历史提交不同导致错误&quot; class=&quot;headerlink&quot; title=&quot;git远程仓库同步,历史提交不同导致错误&quot;&gt;&lt;/a&gt;git远程仓库同步,历史提交不同导致错误&lt;/h2&gt;&lt;h3 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;问题&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
-    
-    
-      <category term="git疑难杂症" scheme="http://23.106.148.149/tags/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
     
   </entry>
   
@@ -278,6 +278,30 @@
   </entry>
   
   <entry>
+    <title>pip相关</title>
+    <link href="http://23.106.148.149/python/python/pip%E7%9B%B8%E5%85%B3/"/>
+    <id>http://23.106.148.149/python/python/pip相关/</id>
+    <published>2016-09-18T16:00:00.000Z</published>
+    <updated>2018-03-29T06:14:22.516Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="pip更新"><a href="#pip更新" class="headerlink" title="pip更新"></a>pip更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install --upgrade pip</div><div class="line">python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本</div></pre></td></tr></table></figure><a id="more"></a><h2 id="win10中python2和python3并存，安装模块"><a href="#win10中python2和python3并存，安装模块" class="headerlink" title="win10中python2和python3并存，安装模块"></a>win10中python2和python3并存，安装模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install xxx</div><div class="line">python3 -m pip install xxx</div></pre></td></tr></table></figure><h2 id="windows上python无法安装lxml"><a href="#windows上python无法安装lxml" class="headerlink" title="windows上python无法安装lxml"></a>windows上python无法安装lxml</h2><h3 id="下载模块"><a href="#下载模块" class="headerlink" title="下载模块"></a>下载模块</h3><p><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml" target="_blank" rel="external">lxml</a>，从这里找到对应的whl文件下载</p><h3 id="安装wheel"><a href="#安装wheel" class="headerlink" title="安装wheel"></a>安装wheel</h3><p>pip3 install wheel</p><h3 id="安装下载的模块"><a href="#安装下载的模块" class="headerlink" title="安装下载的模块"></a>安装下载的模块</h3><p>安装lxml<br>pip3 install 下载的对应模块路径</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;pip更新&quot;&gt;&lt;a href=&quot;#pip更新&quot; class=&quot;headerlink&quot; title=&quot;pip更新&quot;&gt;&lt;/a&gt;pip更新&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;python2 -m pip install --upgrade pip&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://23.106.148.149/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://23.106.148.149/tags/python/"/>
+    
+      <category term="pip" scheme="http://23.106.148.149/tags/pip/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python教程(二)</title>
     <link href="http://23.106.148.149/python/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
     <id>http://23.106.148.149/python/python/Python教程(二)/</id>
@@ -325,30 +349,6 @@
     
     
       <category term="python" scheme="http://23.106.148.149/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pip相关</title>
-    <link href="http://23.106.148.149/python/python/pip%E7%9B%B8%E5%85%B3/"/>
-    <id>http://23.106.148.149/python/python/pip相关/</id>
-    <published>2016-09-18T16:00:00.000Z</published>
-    <updated>2018-03-29T06:14:22.516Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="pip更新"><a href="#pip更新" class="headerlink" title="pip更新"></a>pip更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install --upgrade pip</div><div class="line">python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本</div></pre></td></tr></table></figure><a id="more"></a><h2 id="win10中python2和python3并存，安装模块"><a href="#win10中python2和python3并存，安装模块" class="headerlink" title="win10中python2和python3并存，安装模块"></a>win10中python2和python3并存，安装模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install xxx</div><div class="line">python3 -m pip install xxx</div></pre></td></tr></table></figure><h2 id="windows上python无法安装lxml"><a href="#windows上python无法安装lxml" class="headerlink" title="windows上python无法安装lxml"></a>windows上python无法安装lxml</h2><h3 id="下载模块"><a href="#下载模块" class="headerlink" title="下载模块"></a>下载模块</h3><p><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml" target="_blank" rel="external">lxml</a>，从这里找到对应的whl文件下载</p><h3 id="安装wheel"><a href="#安装wheel" class="headerlink" title="安装wheel"></a>安装wheel</h3><p>pip3 install wheel</p><h3 id="安装下载的模块"><a href="#安装下载的模块" class="headerlink" title="安装下载的模块"></a>安装下载的模块</h3><p>安装lxml<br>pip3 install 下载的对应模块路径</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;pip更新&quot;&gt;&lt;a href=&quot;#pip更新&quot; class=&quot;headerlink&quot; title=&quot;pip更新&quot;&gt;&lt;/a&gt;pip更新&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;python2 -m pip install --upgrade pip&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="http://23.106.148.149/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://23.106.148.149/tags/python/"/>
-    
-      <category term="pip" scheme="http://23.106.148.149/tags/pip/"/>
     
   </entry>
   
