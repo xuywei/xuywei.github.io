@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://23.106.148.149/"/>
-  <updated>2018-03-29T03:53:39.468Z</updated>
+  <updated>2018-04-19T06:12:25.153Z</updated>
   <id>http://23.106.148.149/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git搭建服务器仓库</title>
+    <link href="http://23.106.148.149/Git/git/git%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%93%E5%BA%93/"/>
+    <id>http://23.106.148.149/Git/git/git搭建服务器仓库/</id>
+    <published>2018-04-19T06:00:00.000Z</published>
+    <updated>2018-04-19T06:12:25.153Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="新建远程裸仓库，并配置用户组"><a href="#新建远程裸仓库，并配置用户组" class="headerlink" title="新建远程裸仓库，并配置用户组"></a>新建远程裸仓库，并配置用户组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd /var</div><div class="line">mkdir repo</div><div class="line">cd repo</div><div class="line">git init --bare git_repo.git</div><div class="line">useradd git</div><div class="line">passwd git</div><div class="line">chown -R git:git git_repo.git</div></pre></td></tr></table></figure><h2 id="新建本地仓库，并第一次提交"><a href="#新建本地仓库，并第一次提交" class="headerlink" title="新建本地仓库，并第一次提交"></a>新建本地仓库，并第一次提交</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mkdir git_repo</div><div class="line">cd git_repo</div><div class="line">git init</div><div class="line">git add .</div><div class="line">git commit &quot;首次提交&quot;</div><div class="line">git remote add origin master git@xxx.xxx.xxx.xxx:/var/repo/git_repo.git</div><div class="line">git push origin master</div></pre></td></tr></table></figure><h2 id="配置ssh自动登录"><a href="#配置ssh自动登录" class="headerlink" title="配置ssh自动登录"></a>配置ssh自动登录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">服务器：su git</div><div class="line">cd /home/git</div><div class="line">mkdir .ssh</div><div class="line">chmod 700 .ssh</div><div class="line">cd .ssh</div><div class="line">touch authorizes_keys</div><div class="line">chmod 600 authorizes_keys</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">本地：ssh-keygen -t rsa -C &quot;xxxxx.163.com&quot;一路回车，选择性-C添加秘钥的注释</div><div class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub git@xxx.xxx.xxx.xxx</div><div class="line">git pull、git push 都不需要密码了</div></pre></td></tr></table></figure><h3 id="禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）"><a href="#禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）" class="headerlink" title="禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）"></a>禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）</h3><p>vi /etc/passwd<br>将所要禁用shell用户对应的bin/bash改为bin/git-shell</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;新建远程裸仓库，并配置用户组&quot;&gt;&lt;a href=&quot;#新建远程裸仓库，并配置用户组&quot; class=&quot;headerlink&quot; title=&quot;新建远程裸仓库，并配置用户组&quot;&gt;&lt;/a&gt;新建远程裸仓库，并配置用户组&lt;/h2&gt;&lt;figure class=&quot;highlight 
+      
+    
+    </summary>
+    
+      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
+    
+    
+      <category term="git搭建自己的服务器仓库" scheme="http://23.106.148.149/tags/git%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%93%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>RxJava原理</title>
@@ -110,28 +135,6 @@
   </entry>
   
   <entry>
-    <title>git疑难杂症总结</title>
-    <link href="http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
-    <id>http://23.106.148.149/Git/git/git疑难杂症/</id>
-    <published>2016-09-21T01:52:33.000Z</published>
-    <updated>2017-09-27T05:37:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure><h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure><h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;git远程仓库同步-历史提交不同导致错误&quot;&gt;&lt;a href=&quot;#git远程仓库同步-历史提交不同导致错误&quot; class=&quot;headerlink&quot; title=&quot;git远程仓库同步,历史提交不同导致错误&quot;&gt;&lt;/a&gt;git远程仓库同步,历史提交不同导致错误&lt;/h2&gt;&lt;h3 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;问题&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
-    
-    
-      <category term="git疑难杂症" scheme="http://23.106.148.149/tags/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
-    
-  </entry>
-  
-  <entry>
     <title>git教程(三)</title>
     <link href="http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%89)/"/>
     <id>http://23.106.148.149/Git/git/git教程(三)/</id>
@@ -152,6 +155,28 @@
     
     
       <category term="git同步远程仓库" scheme="http://23.106.148.149/tags/git%E5%90%8C%E6%AD%A5%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git疑难杂症总结</title>
+    <link href="http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
+    <id>http://23.106.148.149/Git/git/git疑难杂症/</id>
+    <published>2016-09-21T01:52:33.000Z</published>
+    <updated>2017-09-27T05:37:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure><h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure><h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;git远程仓库同步-历史提交不同导致错误&quot;&gt;&lt;a href=&quot;#git远程仓库同步-历史提交不同导致错误&quot; class=&quot;headerlink&quot; title=&quot;git远程仓库同步,历史提交不同导致错误&quot;&gt;&lt;/a&gt;git远程仓库同步,历史提交不同导致错误&lt;/h2&gt;&lt;h3 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;问题&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
+    
+    
+      <category term="git疑难杂症" scheme="http://23.106.148.149/tags/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
     
   </entry>
   
@@ -278,6 +303,30 @@
   </entry>
   
   <entry>
+    <title>Python教程(二)</title>
+    <link href="http://23.106.148.149/python/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
+    <id>http://23.106.148.149/python/python/Python教程(二)/</id>
+    <published>2016-09-18T16:00:00.000Z</published>
+    <updated>2018-03-29T06:13:00.759Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote><p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p></blockquote><a id="more"></a><h2 id="Python的函数"><a href="#Python的函数" class="headerlink" title="Python的函数"></a>Python的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class TestClass(object):</div><div class="line">    version = 1.9</div><div class="line">    def __init__(self,nm=&apos;xuwei&apos;):</div><div class="line">        self.name = nm</div><div class="line">        print(nm)</div><div class="line">    def showName(self):</div><div class="line">        print(self.name)</div><div class="line">    def showVersion(self):</div><div class="line">        print(self.version)</div><div class="line">myClass=TestClass()</div><div class="line">myClass.showName()</div><div class="line">myClass.showVersion()</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">sys.stdout.write(&apos;Hello World!\n&apos;)  # 代码的输出，调用了标准的write()方法</div><div class="line">print(sys.platform)  # 平台</div><div class="line">print(sys.version)  # python版本</div><div class="line"># help(dir)</div><div class="line">print(int(&apos;5&apos;))  # 5</div><div class="line">print(len(&apos;sdfas&apos;))  # 5</div><div class="line">print(list(range(5, 15, 2)))  # [5, 7, 9, 11, 13]</div><div class="line">print(str(3434))  # 3434</div><div class="line">print(type(56))  # &lt;class &apos;int&apos;&gt;</div><div class="line"># input(&apos;输入：&apos;)  # 输入：45</div><div class="line">print(dir(sys))  # sys模块中的所有属性</div><div class="line">print(dir)  # &lt;built-in function dir&gt;</div><div class="line">print(dir())  # 没有提供参数，就是显示全局变量的名字的列表print(type(dir))  # &lt;class &apos;builtin_function_or_method&apos;&gt;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;函数的5类参数&quot;&gt;&lt;a href=&quot;#函数的5类参数&quot; class=&quot;headerlink&quot; title=&quot;函数的5类参数&quot;&gt;&lt;/a&gt;函数的5类参数&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://23.106.148.149/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://23.106.148.149/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hexo+Github搭建自己的博客</title>
     <link href="http://23.106.148.149/other/other/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
     <id>http://23.106.148.149/other/other/搭建博客/</id>
@@ -344,30 +393,6 @@
 &lt;li&gt;相对的用java编写的就是前面提到的JPython，不作描述。&lt;/li&gt;
 &lt;li&gt;IronPython，用C#语言完成，适用环境为.NET和Mono&lt;/li&gt;
 &lt;li&gt;Stackless是针对CPython的修改。
-    
-    </summary>
-    
-      <category term="python" scheme="http://23.106.148.149/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://23.106.148.149/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python教程(二)</title>
-    <link href="http://23.106.148.149/python/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
-    <id>http://23.106.148.149/python/python/Python教程(二)/</id>
-    <published>2016-09-18T16:00:00.000Z</published>
-    <updated>2018-03-29T06:13:00.759Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote><p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p></blockquote><a id="more"></a><h2 id="Python的函数"><a href="#Python的函数" class="headerlink" title="Python的函数"></a>Python的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class TestClass(object):</div><div class="line">    version = 1.9</div><div class="line">    def __init__(self,nm=&apos;xuwei&apos;):</div><div class="line">        self.name = nm</div><div class="line">        print(nm)</div><div class="line">    def showName(self):</div><div class="line">        print(self.name)</div><div class="line">    def showVersion(self):</div><div class="line">        print(self.version)</div><div class="line">myClass=TestClass()</div><div class="line">myClass.showName()</div><div class="line">myClass.showVersion()</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">sys.stdout.write(&apos;Hello World!\n&apos;)  # 代码的输出，调用了标准的write()方法</div><div class="line">print(sys.platform)  # 平台</div><div class="line">print(sys.version)  # python版本</div><div class="line"># help(dir)</div><div class="line">print(int(&apos;5&apos;))  # 5</div><div class="line">print(len(&apos;sdfas&apos;))  # 5</div><div class="line">print(list(range(5, 15, 2)))  # [5, 7, 9, 11, 13]</div><div class="line">print(str(3434))  # 3434</div><div class="line">print(type(56))  # &lt;class &apos;int&apos;&gt;</div><div class="line"># input(&apos;输入：&apos;)  # 输入：45</div><div class="line">print(dir(sys))  # sys模块中的所有属性</div><div class="line">print(dir)  # &lt;built-in function dir&gt;</div><div class="line">print(dir())  # 没有提供参数，就是显示全局变量的名字的列表print(type(dir))  # &lt;class &apos;builtin_function_or_method&apos;&gt;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;函数的5类参数&quot;&gt;&lt;a href=&quot;#函数的5类参数&quot; class=&quot;headerlink&quot; title=&quot;函数的5类参数&quot;&gt;&lt;/a&gt;函数的5类参数&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。&lt;/p&gt;
-&lt;/blockquote&gt;
     
     </summary>
     

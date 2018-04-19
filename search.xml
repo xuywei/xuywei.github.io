@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title><![CDATA[git搭建服务器仓库]]></title>
+      <url>http://23.106.148.149/Git/git/git%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%93%E5%BA%93/</url>
+      <content type="html"><![CDATA[<h2 id="新建远程裸仓库，并配置用户组"><a href="#新建远程裸仓库，并配置用户组" class="headerlink" title="新建远程裸仓库，并配置用户组"></a>新建远程裸仓库，并配置用户组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd /var</div><div class="line">mkdir repo</div><div class="line">cd repo</div><div class="line">git init --bare git_repo.git</div><div class="line">useradd git</div><div class="line">passwd git</div><div class="line">chown -R git:git git_repo.git</div></pre></td></tr></table></figure>
+<h2 id="新建本地仓库，并第一次提交"><a href="#新建本地仓库，并第一次提交" class="headerlink" title="新建本地仓库，并第一次提交"></a>新建本地仓库，并第一次提交</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mkdir git_repo</div><div class="line">cd git_repo</div><div class="line">git init</div><div class="line">git add .</div><div class="line">git commit &quot;首次提交&quot;</div><div class="line">git remote add origin master git@xxx.xxx.xxx.xxx:/var/repo/git_repo.git</div><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<h2 id="配置ssh自动登录"><a href="#配置ssh自动登录" class="headerlink" title="配置ssh自动登录"></a>配置ssh自动登录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">服务器：su git</div><div class="line">cd /home/git</div><div class="line">mkdir .ssh</div><div class="line">chmod 700 .ssh</div><div class="line">cd .ssh</div><div class="line">touch authorizes_keys</div><div class="line">chmod 600 authorizes_keys</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">本地：ssh-keygen -t rsa -C &quot;xxxxx.163.com&quot;一路回车，选择性-C添加秘钥的注释</div><div class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub git@xxx.xxx.xxx.xxx</div><div class="line">git pull、git push 都不需要密码了</div></pre></td></tr></table></figure>
+<h3 id="禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）"><a href="#禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）" class="headerlink" title="禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）"></a>禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）</h3><p>vi /etc/passwd<br>将所要禁用shell用户对应的bin/bash改为bin/git-shell</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Git </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> git搭建自己的服务器仓库 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[RxJava原理]]></title>
       <url>http://23.106.148.149/android/android/RxJava%E5%8E%9F%E7%90%86/</url>
       <content type="html"><![CDATA[<h2 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h2>]]></content>
@@ -192,31 +217,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[git疑难杂症总结]]></title>
-      <url>http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</url>
-      <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure>
-<h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p>
-<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure>
-<h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Git </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> git疑难杂症 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[git教程(三)]]></title>
       <url>http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%89)/</url>
       <content type="html"><![CDATA[<h2 id="git的远程和本地的同步交互操作"><a href="#git的远程和本地的同步交互操作" class="headerlink" title="git的远程和本地的同步交互操作"></a>git的远程和本地的同步交互操作</h2><blockquote>
@@ -241,6 +241,31 @@
         <tags>
             
             <tag> git同步远程仓库 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[git疑难杂症总结]]></title>
+      <url>http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</url>
+      <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure>
+<h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p>
+<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure>
+<h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Git </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> git疑难杂症 </tag>
             
         </tags>
         
@@ -362,6 +387,31 @@
         <tags>
             
             <tag> O(n)和O(1) </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Python教程(二)]]></title>
+      <url>http://23.106.148.149/python/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/</url>
+      <content type="html"><![CDATA[<h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote>
+<p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Python的函数"><a href="#Python的函数" class="headerlink" title="Python的函数"></a>Python的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class TestClass(object):</div><div class="line">    version = 1.9</div><div class="line">    def __init__(self,nm=&apos;xuwei&apos;):</div><div class="line">        self.name = nm</div><div class="line">        print(nm)</div><div class="line">    def showName(self):</div><div class="line">        print(self.name)</div><div class="line">    def showVersion(self):</div><div class="line">        print(self.version)</div><div class="line">myClass=TestClass()</div><div class="line">myClass.showName()</div><div class="line">myClass.showVersion()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">sys.stdout.write(&apos;Hello World!\n&apos;)  # 代码的输出，调用了标准的write()方法</div><div class="line">print(sys.platform)  # 平台</div><div class="line">print(sys.version)  # python版本</div><div class="line"># help(dir)</div><div class="line">print(int(&apos;5&apos;))  # 5</div><div class="line">print(len(&apos;sdfas&apos;))  # 5</div><div class="line">print(list(range(5, 15, 2)))  # [5, 7, 9, 11, 13]</div><div class="line">print(str(3434))  # 3434</div><div class="line">print(type(56))  # &lt;class &apos;int&apos;&gt;</div><div class="line"># input(&apos;输入：&apos;)  # 输入：45</div><div class="line">print(dir(sys))  # sys模块中的所有属性</div><div class="line">print(dir)  # &lt;built-in function dir&gt;</div><div class="line">print(dir())  # 没有提供参数，就是显示全局变量的名字的列表print(type(dir))  # &lt;class &apos;builtin_function_or_method&apos;&gt;</div></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> python </tag>
             
         </tags>
         
@@ -500,31 +550,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"># if语句</div><div class="line">&gt;&gt;&gt; if 1 &gt; 2:</div><div class="line">...     print(&apos;1&apos;)</div><div class="line">... elif 2 &gt; 3:</div><div class="line">...     print(&apos;2&apos;)</div><div class="line">... else:</div><div class="line">...     print(&apos;3&apos;)</div><div class="line">...     </div><div class="line">3</div><div class="line"># while语句</div><div class="line">&gt;&gt;&gt; while x &lt; 3:</div><div class="line">...     print(x)</div><div class="line">...     x += 1</div><div class="line">...     </div><div class="line">0</div><div class="line">1</div><div class="line">2</div><div class="line"># for循环和range()内建函数</div><div class="line">&gt;&gt;&gt; foo = &apos;abcde&apos;  # 遍历字符串中的字符</div><div class="line">&gt;&gt;&gt; for i in range(len(foo)):</div><div class="line">...     print(foo[i],&apos;%d&apos;%i)</div><div class="line">...     </div><div class="line">a 0</div><div class="line">b 1</div><div class="line">c 2</div><div class="line">d 3</div><div class="line">遍历key，char的简易用法</div><div class="line">&gt;&gt;&gt; for i ,ch in enumerate(foo):</div><div class="line">...     print(ch,i)</div><div class="line">...     </div><div class="line">a 0</div><div class="line">b 1</div><div class="line">c 2</div><div class="line">d 3</div><div class="line">e 4</div><div class="line"># 列表解析</div><div class="line">&gt;&gt;&gt; squared = [x ** 2 for x in range(4)]</div><div class="line">&gt;&gt;&gt; for i in squared:</div><div class="line">...     print(i)</div><div class="line">...     </div><div class="line">0</div><div class="line">1</div><div class="line">4</div><div class="line">9</div><div class="line"># 后边还可以进行筛选循环之后的结果后，进行最后解析</div><div class="line">&gt;&gt;&gt; squared = [x ** 2 for x in range(4) if not x % 2]  # 0是False，1是True</div><div class="line">&gt;&gt;&gt; for i in squared:</div><div class="line">...     print(i)</div><div class="line">...     </div><div class="line">0</div><div class="line">4</div></pre></td></tr></table></figure>
 <h2 id="异常的捕捉"><a href="#异常的捕捉" class="headerlink" title="异常的捕捉"></a>异常的捕捉</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">try:</div><div class="line">    raiseexcept Exception as e:</div><div class="line">    t,v,tb = sys.exc_info()  # 异常的类型名称，异常实例，追溯异常流程对象traceback</div><div class="line">    print(t,v,tb)</div></pre></td></tr></table></figure>
 <h2 id="文件和内建函数open-和file"><a href="#文件和内建函数open-和file" class="headerlink" title="文件和内建函数open()和file()"></a>文件和内建函数open()和file()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">fileName = &apos;.gitignore&apos;</div><div class="line">file = open(fileName, &apos;r&apos;)</div><div class="line">try:</div><div class="line">    for line in file:  # 最快的读取每一行文本的方法        </div><div class="line">        # lineline = line.rstrip(&apos;\n&apos;) # 去除每行末尾的\n符号</div><div class="line">        lineline = line.rstrip()  # 去除\n和空白符</div><div class="line">        print(lineline)</div><div class="line">    file.close()</div><div class="line">except Exception as e:  # python3要求我们的异常必须继承Exception类，这样可以捕获所有异常</div><div class="line">           print(e)</div><div class="line">print(&apos;-&apos;*20)</div><div class="line">file = open(fileName)</div><div class="line">try:</div><div class="line">    splitlines = file.readlines()  # 将所有行一次读出来    </div><div class="line">    # splitlines = file.read().splitlines()  # 将\n给去除</div><div class="line">    splitlines = file.read().split(&apos;\n&apos;)  # 另一种方法去除</div><div class="line">    file.close()</div><div class="line">    for line in splitlines:</div><div class="line">        print(line,end=&apos;&apos;)</div><div class="line">except Exception as e:  # python3要求我们的异常必须继承Exception类，这样可以捕获所有异常</div><div class="line">             print(e)</div></pre></td></tr></table></figure>]]></content>
-      
-        <categories>
-            
-            <category> python </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> python </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Python教程(二)]]></title>
-      <url>http://23.106.148.149/python/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/</url>
-      <content type="html"><![CDATA[<h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote>
-<p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="Python的函数"><a href="#Python的函数" class="headerlink" title="Python的函数"></a>Python的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class TestClass(object):</div><div class="line">    version = 1.9</div><div class="line">    def __init__(self,nm=&apos;xuwei&apos;):</div><div class="line">        self.name = nm</div><div class="line">        print(nm)</div><div class="line">    def showName(self):</div><div class="line">        print(self.name)</div><div class="line">    def showVersion(self):</div><div class="line">        print(self.version)</div><div class="line">myClass=TestClass()</div><div class="line">myClass.showName()</div><div class="line">myClass.showVersion()</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">sys.stdout.write(&apos;Hello World!\n&apos;)  # 代码的输出，调用了标准的write()方法</div><div class="line">print(sys.platform)  # 平台</div><div class="line">print(sys.version)  # python版本</div><div class="line"># help(dir)</div><div class="line">print(int(&apos;5&apos;))  # 5</div><div class="line">print(len(&apos;sdfas&apos;))  # 5</div><div class="line">print(list(range(5, 15, 2)))  # [5, 7, 9, 11, 13]</div><div class="line">print(str(3434))  # 3434</div><div class="line">print(type(56))  # &lt;class &apos;int&apos;&gt;</div><div class="line"># input(&apos;输入：&apos;)  # 输入：45</div><div class="line">print(dir(sys))  # sys模块中的所有属性</div><div class="line">print(dir)  # &lt;built-in function dir&gt;</div><div class="line">print(dir())  # 没有提供参数，就是显示全局变量的名字的列表print(type(dir))  # &lt;class &apos;builtin_function_or_method&apos;&gt;</div></pre></td></tr></table></figure>]]></content>
       
         <categories>
             
