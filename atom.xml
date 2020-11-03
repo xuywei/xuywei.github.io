@@ -5,9 +5,9 @@
   <subtitle>^.^懒癌^.^</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://23.106.148.149/"/>
-  <updated>2018-04-19T06:23:41.995Z</updated>
-  <id>http://23.106.148.149/</id>
+  <link href="http://47.94.170.102/"/>
+  <updated>2019-02-28T15:43:58.000Z</updated>
+  <id>http://47.94.170.102/</id>
   
   <author>
     <name>sxw</name>
@@ -17,11 +17,62 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>LocalService与RemoteService</title>
+    <link href="http://47.94.170.102/android/android/LocalService%E4%B8%8ERemoteService/"/>
+    <id>http://47.94.170.102/android/android/LocalService与RemoteService/</id>
+    <published>2019-02-27T16:00:00.000Z</published>
+    <updated>2019-02-28T15:43:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="本地服务LocalService"><a href="#本地服务LocalService" class="headerlink" title="本地服务LocalService"></a>本地服务LocalService</h2><blockquote><p>不和Activity交互的本地服务startService、stopService<br>第一次startService，调用onCreate和onStartCommand，再次startService，只调用onStartCommand<br>stopService时调用onDestory。再次stopService，会发现不会进入service的生命周期，即不会再调用onCreate、onStart和onDestory。<br>而onBind 在startService和stopService中没有调用。</p><p>需要和Activity交互的本地服务：使用bindService<br>在继承的Service类中，可以发现onBind需要返回一个IBinder对象，也就是说和startService不同的是：<br>1、添加一个public内部类继承Binder，并添加getService方法来返回当前Service对象<br>2、新建一个IBinder对象—-new那个Binder内部类<br>3、onBind方法返回那个IBinder对象</p></blockquote><p>在通信的Activity中，添加了一个名为ServiceConnection的类，并实现了onServiceConnected(从IBinder获取Service对象)和onServiceDisconnected(set service to null)。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">bindService：</div><div class="line">1、LoaclService：onCreate</div><div class="line">2、LocalService：onBind</div><div class="line">3、Activity：onServiceConnected</div><div class="line"></div><div class="line">unbindService：</div><div class="line">1、LocalService：onUnbind</div><div class="line">2、Activity：onDestory</div></pre></td></tr></table></figure><p>有个疑问：通过bindService启动的服务，通过手机设置里面查看，并没有一个运行的服务归属于主进程。而通过startService启动的服务却有一个运行的服务归属于主进程。求大神解释下。</p><h2 id="远程服务RemoteService（AIDL）"><a href="#远程服务RemoteService（AIDL）" class="headerlink" title="远程服务RemoteService（AIDL）"></a>远程服务RemoteService（AIDL）</h2><p>Local Service，即Service和Client在同一进程内（即同一application内）Service的生命周期服从进程的生命周期。<br>在实际应用上，有时希望Service作为后台服务，不仅被同一进程内的activity使用，也可被其他进程所使用，针对这种情况，需要采用 bindService，也就是Remote Service的方式。<br>在Android中，不同app属不同进程 （process），进程是安全策略的边界，一个进程不能访问其他进程的存储（例如采用ContentProvider）。<br>在Remote Service中将涉及进程间通信，也就是通常讲的IPC（interprocess commnication），需要在进程A和进程B之间建立连接，以便进行相互的通信或数据传递 。</p><p>Android提供AIDL（Android Interface Definition Language）工具帮助IPC之间接口的建立，大大地简化了开发者视图。右示意图仅用于帮助理解代码。通过下面的步骤实现client和service之间的通信：</p><p>【1】定义AIDL接口 ，Eclipse将自动为Service建立接口IService<br>【2】Client连接Service，连接到IService暴露给Client的Stub，获得stub对象；换句话，Service通过接口中的Stub向client提供服务，在IService中对抽象IService.Stub具体实现。<br>【3】Client和Service连接后，Client可向使用本地方法那样，简单地直接调用IService.Stub里面的方法。</p><p>远程服务为独立进程。</p><p>客户端<br>通过AIDL方式建立一个到服务对象的连接，并通过那个连接来调用服务。连接以调用Context.bindService()方法建立，以调用<br>Context.unbindService()方法关闭。其实这个调用和那个本地服务中需要与Activity交互的方式是一样的。同时多个客户端可以<br>绑定到同一个服务。</p><p>AIDL使用步骤(这里的做法是服务端和客户端分开的形式，貌似也可以服务端客户端写在一个应用中。需要在AndroidManifest.xml的service标签中配置android:process)：</p><p>1、首先创建服务端项目，创建一个AIDL文件，AIDL文件使用的包名建议与Package所指定的包名相同。</p><p>2、将AIDL文件添加到Package所指定的包下面，Android Eclipse插件将调用AIDL编译器来从AIDL文件生成java接口。</p><p>3、实现一个服务并从onBind方法返回生成的接口</p><p>4、将服务配置到添加到AndroidManifest.xml文件中</p><p>注意一下：客户端和服务端的AIDL文件内容必须一样，通常做法是把服务端的写好后直接复制到客户端，以保证完全一样。</p><p>尤其要注意的是：<action>标签中android:name的属性值就是客户端要引用改服务的ID，也就是Intent类的参数值</action></p><p>最后对Service里面onStartCommand方法返回值进行下说明：</p><p>onStartCommand方法必须返回一个整数，这个整数是一个描述了在系统的杀死事件中，系统应该如何继续这个服务的值，从onStartCommand返回的值必须是一下常量：</p><p>START_NOT_STICKY：如果系统在onStartCommand方法返回之后杀死这个服务，那个直到接收新的intent对象，这个服务才会被重新创建。这是最安全的选项，用来避免在不需要的时候运行你的服务。</p><p>START_STICKY：<br>如果系统在onStartCommand返回后杀死这个服务，系统就会重新创建这个服务并且调用onStartCommand方法，但是它不会重新传递最<br>后的Intent对象，系统会用一个null的intent对象来调用onStartCommand方法，在这个情况下，除非有一些被发送的Intent<br>对象在等待启动服务。这适合于不执行命令的媒体播放器(或类似服务)，它只是无限期的运行着并等待工作结束。</p><p>START_REDELIVER_INTENT：<br>如果系统在onStartCommand方法返回后，系统就会重新创建了这个服务，并且用发送给这个服务的最后的Intent对象调用了<br>onStartCommand方法。任意等待中的Intent对象会依次被发送。这适用于那些应该立即恢复正在执行的工作服务，比如下载等。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;本地服务LocalService&quot;&gt;&lt;a href=&quot;#本地服务LocalService&quot; class=&quot;headerlink&quot; title=&quot;本地服务LocalService&quot;&gt;&lt;/a&gt;本地服务LocalService&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;不
+      
+    
+    </summary>
+    
+      <category term="android" scheme="http://47.94.170.102/categories/android/"/>
+    
+    
+      <category term="Service" scheme="http://47.94.170.102/tags/Service/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git常见场景</title>
+    <link href="http://47.94.170.102/Git/git/git%E5%B8%B8%E8%A7%81%E5%9C%BA%E6%99%AF/"/>
+    <id>http://47.94.170.102/Git/git/git常见场景/</id>
+    <published>2018-04-19T07:00:00.000Z</published>
+    <updated>2018-04-19T06:54:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="git删除-撤销已经push到远程服务器上的某次代码提交"><a href="#git删除-撤销已经push到远程服务器上的某次代码提交" class="headerlink" title="git删除/撤销已经push到远程服务器上的某次代码提交"></a>git删除/撤销已经push到远程服务器上的某次代码提交</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reset --hard &lt;commit_id&gt;</div><div class="line">git push origin HEAD --force</div></pre></td></tr></table></figure><h2 id="git删除远程remote分支"><a href="#git删除远程remote分支" class="headerlink" title="git删除远程remote分支"></a>git删除远程remote分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin --delete &lt;远程分支名字&gt;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;git删除-撤销已经push到远程服务器上的某次代码提交&quot;&gt;&lt;a href=&quot;#git删除-撤销已经push到远程服务器上的某次代码提交&quot; class=&quot;headerlink&quot; title=&quot;git删除/撤销已经push到远程服务器上的某次代码提交&quot;&gt;&lt;/a&gt;gi
+      
+    
+    </summary>
+    
+      <category term="Git" scheme="http://47.94.170.102/categories/Git/"/>
+    
+    
+      <category term="git常见命令组合" scheme="http://47.94.170.102/tags/git%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E7%BB%84%E5%90%88/"/>
+    
+  </entry>
+  
+  <entry>
     <title>git搭建服务器仓库</title>
-    <link href="http://23.106.148.149/Git/git/git%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%93%E5%BA%93/"/>
-    <id>http://23.106.148.149/Git/git/git搭建服务器仓库/</id>
+    <link href="http://47.94.170.102/Git/git/git%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%93%E5%BA%93/"/>
+    <id>http://47.94.170.102/Git/git/git搭建服务器仓库/</id>
     <published>2018-04-19T06:00:00.000Z</published>
-    <updated>2018-04-19T06:23:41.995Z</updated>
+    <updated>2018-04-19T06:23:41.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="新建远程裸仓库，并配置用户组"><a href="#新建远程裸仓库，并配置用户组" class="headerlink" title="新建远程裸仓库，并配置用户组"></a>新建远程裸仓库，并配置用户组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd /var</div><div class="line">mkdir repo</div><div class="line">cd repo</div><div class="line">git init --bare git_repo.git</div><div class="line">useradd git</div><div class="line">passwd git</div><div class="line">chown -R git:git git_repo.git</div></pre></td></tr></table></figure><a id="more"></a><h2 id="新建本地仓库，并第一次提交"><a href="#新建本地仓库，并第一次提交" class="headerlink" title="新建本地仓库，并第一次提交"></a>新建本地仓库，并第一次提交</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mkdir git_repo</div><div class="line">cd git_repo</div><div class="line">git init</div><div class="line">git add .</div><div class="line">git commit &quot;首次提交&quot;</div><div class="line">git remote add origin master git@xxx.xxx.xxx.xxx:/var/repo/git_repo.git</div><div class="line">git push origin master</div></pre></td></tr></table></figure><h2 id="配置ssh自动登录"><a href="#配置ssh自动登录" class="headerlink" title="配置ssh自动登录"></a>配置ssh自动登录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">服务器：su git</div><div class="line">cd /home/git</div><div class="line">mkdir .ssh</div><div class="line">chmod 700 .ssh</div><div class="line">cd .ssh</div><div class="line">touch authorizes_keys</div><div class="line">chmod 600 authorizes_keys</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">本地：ssh-keygen -t rsa -C &quot;xxxxx.163.com&quot;一路回车，选择性-C添加秘钥的注释</div><div class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub git@xxx.xxx.xxx.xxx</div><div class="line">git pull、git push 都不需要密码了</div></pre></td></tr></table></figure><h3 id="禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）"><a href="#禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）" class="headerlink" title="禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）"></a>禁用shell登录（一般是不需要的，因为这将导致su切换子用户不成功）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vi /etc/passwd</div><div class="line">将所要禁用shell用户对应的bin/bash改为bin/git-shell</div></pre></td></tr></table></figure>]]></content>
     
@@ -31,19 +82,19 @@
     
     </summary>
     
-      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
+      <category term="Git" scheme="http://47.94.170.102/categories/Git/"/>
     
     
-      <category term="git搭建自己的服务器仓库" scheme="http://23.106.148.149/tags/git%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%93%E5%BA%93/"/>
+      <category term="git搭建自己的服务器仓库" scheme="http://47.94.170.102/tags/git%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%93%E5%BA%93/"/>
     
   </entry>
   
   <entry>
     <title>RxJava原理</title>
-    <link href="http://23.106.148.149/android/android/RxJava%E5%8E%9F%E7%90%86/"/>
-    <id>http://23.106.148.149/android/android/RxJava原理/</id>
+    <link href="http://47.94.170.102/android/android/RxJava%E5%8E%9F%E7%90%86/"/>
+    <id>http://47.94.170.102/android/android/RxJava原理/</id>
     <published>2018-03-28T16:00:00.000Z</published>
-    <updated>2018-03-29T03:53:39.468Z</updated>
+    <updated>2018-03-29T03:53:39.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h2>]]></content>
     
@@ -56,17 +107,17 @@
     
     </summary>
     
-      <category term="android" scheme="http://23.106.148.149/categories/android/"/>
+      <category term="android" scheme="http://47.94.170.102/categories/android/"/>
     
     
-      <category term="RxJava" scheme="http://23.106.148.149/tags/RxJava/"/>
+      <category term="RxJava" scheme="http://47.94.170.102/tags/RxJava/"/>
     
   </entry>
   
   <entry>
     <title>mysql常用命令</title>
-    <link href="http://23.106.148.149/mysql/mysql/mysql%E5%AE%89%E8%A3%85/"/>
-    <id>http://23.106.148.149/mysql/mysql/mysql安装/</id>
+    <link href="http://47.94.170.102/mysql/mysql/mysql%E5%AE%89%E8%A3%85/"/>
+    <id>http://47.94.170.102/mysql/mysql/mysql安装/</id>
     <published>2016-10-14T05:33:33.000Z</published>
     <updated>2017-09-27T05:37:36.000Z</updated>
     
@@ -80,17 +131,17 @@
     
     </summary>
     
-      <category term="mysql" scheme="http://23.106.148.149/categories/mysql/"/>
+      <category term="mysql" scheme="http://47.94.170.102/categories/mysql/"/>
     
     
-      <category term="mysql" scheme="http://23.106.148.149/tags/mysql/"/>
+      <category term="mysql" scheme="http://47.94.170.102/tags/mysql/"/>
     
   </entry>
   
   <entry>
     <title>MarkDowm语法</title>
-    <link href="http://23.106.148.149/other/other/MarkDowm%E8%AF%AD%E6%B3%95/"/>
-    <id>http://23.106.148.149/other/other/MarkDowm语法/</id>
+    <link href="http://47.94.170.102/other/other/MarkDowm%E8%AF%AD%E6%B3%95/"/>
+    <id>http://47.94.170.102/other/other/MarkDowm语法/</id>
     <published>2016-09-21T02:20:33.000Z</published>
     <updated>2017-09-27T05:37:36.000Z</updated>
     
@@ -102,39 +153,17 @@
     
     </summary>
     
-      <category term="other" scheme="http://23.106.148.149/categories/other/"/>
+      <category term="other" scheme="http://47.94.170.102/categories/other/"/>
     
     
-      <category term="MarkDown语法" scheme="http://23.106.148.149/tags/MarkDown%E8%AF%AD%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git疑难杂症总结</title>
-    <link href="http://23.106.148.149/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
-    <id>http://23.106.148.149/Git/git/git疑难杂症/</id>
-    <published>2016-09-21T01:52:33.000Z</published>
-    <updated>2017-09-27T05:37:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure><h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure><h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;git远程仓库同步-历史提交不同导致错误&quot;&gt;&lt;a href=&quot;#git远程仓库同步-历史提交不同导致错误&quot; class=&quot;headerlink&quot; title=&quot;git远程仓库同步,历史提交不同导致错误&quot;&gt;&lt;/a&gt;git远程仓库同步,历史提交不同导致错误&lt;/h2&gt;&lt;h3 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;问题&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
-    
-    
-      <category term="git疑难杂症" scheme="http://23.106.148.149/tags/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
+      <category term="MarkDown语法" scheme="http://47.94.170.102/tags/MarkDown%E8%AF%AD%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>git教程(二)</title>
-    <link href="http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
-    <id>http://23.106.148.149/Git/git/git教程(二)/</id>
+    <link href="http://47.94.170.102/Git/git/git%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
+    <id>http://47.94.170.102/Git/git/git教程(二)/</id>
     <published>2016-09-21T01:52:33.000Z</published>
     <updated>2017-09-27T05:37:36.000Z</updated>
     
@@ -146,17 +175,39 @@
     
     </summary>
     
-      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
+      <category term="Git" scheme="http://47.94.170.102/categories/Git/"/>
     
     
-      <category term="git本地提交" scheme="http://23.106.148.149/tags/git%E6%9C%AC%E5%9C%B0%E6%8F%90%E4%BA%A4/"/>
+      <category term="git本地提交" scheme="http://47.94.170.102/tags/git%E6%9C%AC%E5%9C%B0%E6%8F%90%E4%BA%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git疑难杂症总结</title>
+    <link href="http://47.94.170.102/Git/git/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
+    <id>http://47.94.170.102/Git/git/git疑难杂症/</id>
+    <published>2016-09-21T01:52:33.000Z</published>
+    <updated>2017-09-27T05:37:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="git远程仓库同步-历史提交不同导致错误"><a href="#git远程仓库同步-历史提交不同导致错误" class="headerlink" title="git远程仓库同步,历史提交不同导致错误"></a>git远程仓库同步,历史提交不同导致错误</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p><img src="http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="问题"><br><a id="more"></a><br>这是在2.9版本git之后出现的问题，就是当发现不同的历史时（已经有人提交过，一般情况下只会出现一次这样的情况）</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin master --allow-unrelated-histories</div></pre></td></tr></table></figure><h2 id="gitignore不生效"><a href="#gitignore不生效" class="headerlink" title=".gitignore不生效"></a>.gitignore不生效</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>之前add进版本库的文件，现在添加了一个.gitignore文件后，不希望之前跟踪过的文件被跟踪了</p><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached . #删除追踪状态</div><div class="line">git add . </div><div class="line">git commit -m &quot;fixed untracked files&quot;</div></pre></td></tr></table></figure><h2 id="git文件夹导致不能跟踪文件"><a href="#git文件夹导致不能跟踪文件" class="headerlink" title=".git文件夹导致不能跟踪文件"></a>.git文件夹导致不能跟踪文件</h2><h3 id="问题描述：本地git-add-后查看git-status"><a href="#问题描述：本地git-add-后查看git-status" class="headerlink" title="问题描述：本地git add .后查看git  status"></a>问题描述：本地git add .后查看git  status</h3><p>出现modified: xxx(modified content, untracked content)<br>大概意思是xxx目录没有被跟踪。那自然push上去的时候是空的了<br>解决办法：<br>主要是xxx目录下有一个.git 目录，删除.git目录，重新git add .后续操作</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;git远程仓库同步-历史提交不同导致错误&quot;&gt;&lt;a href=&quot;#git远程仓库同步-历史提交不同导致错误&quot; class=&quot;headerlink&quot; title=&quot;git远程仓库同步,历史提交不同导致错误&quot;&gt;&lt;/a&gt;git远程仓库同步,历史提交不同导致错误&lt;/h2&gt;&lt;h3 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1654122-69115bc264b92f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;问题&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Git" scheme="http://47.94.170.102/categories/Git/"/>
+    
+    
+      <category term="git疑难杂症" scheme="http://47.94.170.102/tags/git%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/"/>
     
   </entry>
   
   <entry>
     <title>git教程(三)</title>
-    <link href="http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%89)/"/>
-    <id>http://23.106.148.149/Git/git/git教程(三)/</id>
+    <link href="http://47.94.170.102/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%89)/"/>
+    <id>http://47.94.170.102/Git/git/git教程(三)/</id>
     <published>2016-09-21T01:52:33.000Z</published>
     <updated>2017-09-27T05:37:36.000Z</updated>
     
@@ -170,17 +221,17 @@
     
     </summary>
     
-      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
+      <category term="Git" scheme="http://47.94.170.102/categories/Git/"/>
     
     
-      <category term="git同步远程仓库" scheme="http://23.106.148.149/tags/git%E5%90%8C%E6%AD%A5%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/"/>
+      <category term="git同步远程仓库" scheme="http://47.94.170.102/tags/git%E5%90%8C%E6%AD%A5%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/"/>
     
   </entry>
   
   <entry>
     <title>git教程(一)</title>
-    <link href="http://23.106.148.149/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%80)/"/>
-    <id>http://23.106.148.149/Git/git/git教程(一)/</id>
+    <link href="http://47.94.170.102/Git/git/git%E6%95%99%E7%A8%8B(%E4%B8%80)/"/>
+    <id>http://47.94.170.102/Git/git/git教程(一)/</id>
     <published>2016-09-21T01:49:33.000Z</published>
     <updated>2017-09-27T05:37:36.000Z</updated>
     
@@ -192,17 +243,17 @@
     
     </summary>
     
-      <category term="Git" scheme="http://23.106.148.149/categories/Git/"/>
+      <category term="Git" scheme="http://47.94.170.102/categories/Git/"/>
     
     
-      <category term="git安装初始化配置" scheme="http://23.106.148.149/tags/git%E5%AE%89%E8%A3%85%E5%88%9D%E5%A7%8B%E5%8C%96%E9%85%8D%E7%BD%AE/"/>
+      <category term="git安装初始化配置" scheme="http://47.94.170.102/tags/git%E5%AE%89%E8%A3%85%E5%88%9D%E5%A7%8B%E5%8C%96%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
   <entry>
     <title>单例设计模式</title>
-    <link href="http://23.106.148.149/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/design_mode/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://23.106.148.149/设计模式/design_mode/单例模式/</id>
+    <link href="http://47.94.170.102/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/design_mode/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://47.94.170.102/设计模式/design_mode/单例模式/</id>
     <published>2016-09-21T01:46:33.000Z</published>
     <updated>2017-09-27T05:37:36.000Z</updated>
     
@@ -217,19 +268,19 @@
     
     </summary>
     
-      <category term="设计模式" scheme="http://23.106.148.149/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="设计模式" scheme="http://47.94.170.102/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
     
-      <category term="单例模式" scheme="http://23.106.148.149/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+      <category term="单例模式" scheme="http://47.94.170.102/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
     <title>OkHttp使用详解</title>
-    <link href="http://23.106.148.149/android/android/OkHttp%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://23.106.148.149/android/android/OkHttp详解/</id>
+    <link href="http://47.94.170.102/android/android/OkHttp%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://47.94.170.102/android/android/OkHttp详解/</id>
     <published>2016-09-21T01:27:12.000Z</published>
-    <updated>2018-03-29T03:51:22.995Z</updated>
+    <updated>2018-03-29T03:51:22.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Interceptor详解"><a href="#Interceptor详解" class="headerlink" title="Interceptor详解"></a>Interceptor详解</h2><h3 id="什么是Interceptor："><a href="#什么是Interceptor：" class="headerlink" title="什么是Interceptor："></a>什么是Interceptor：</h3><blockquote><p>Interceptor翻译过来就是拦截器，它是OkHttp网络请求中抓取请求和响应必须的一个全能王。</p></blockquote><p>你如果用过okhttp，一定对HttpLoggingInterceptor不陌生，这个是squareup公司写的一个样板，其实它呢也就是告诉你了任何你想拿到的数据。看源码么，go。。。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div></pre></td><td class="code"><pre><div class="line">public final class HttpLoggingInterceptor implements Interceptor &#123;</div><div class="line">  private static final Charset UTF8 = Charset.forName(&quot;UTF-8&quot;);</div><div class="line">//设置拦截级别，枚举4种</div><div class="line">  public enum Level &#123;</div><div class="line">    NONE,</div><div class="line">    BASIC,</div><div class="line">    HEADERS,</div><div class="line">    BODY</div><div class="line">  &#125;</div><div class="line">。。。。。。。。。。</div><div class="line">。。。。。。。。。。</div><div class="line">。。。。。。。。。。</div><div class="line">  @Override public Response intercept(Chain chain) throws IOException &#123;</div><div class="line">    Level level = this.level;</div><div class="line">    Request request = chain.request();</div><div class="line">    if (level == Level.NONE) &#123;</div><div class="line">      //不拦截，直接返回</div><div class="line">      return chain.proceed(request);</div><div class="line">    &#125;</div><div class="line">    boolean logBody = level == Level.BODY;</div><div class="line">    boolean logHeaders = logBody || level == Level.HEADERS;</div><div class="line">    RequestBody requestBody = request.body();</div><div class="line">    boolean hasRequestBody = requestBody != null;</div><div class="line">    //建立连接</div><div class="line">    Connection connection = chain.connection();</div><div class="line">    //拿到连接协议，如果连接不存在就直接用http_1_1协议</div><div class="line">    Protocol protocol = connection != null ? connection.protocol() : Protocol.HTTP_1_1;</div><div class="line">    String requestStartMessage = &quot;--&gt; &quot; + request.method() + &apos; &apos; + request.url() + &apos; &apos; + protocol;</div><div class="line">    //如果设置的级别是base，就打印头部分</div><div class="line">    if (!logHeaders &amp;&amp; hasRequestBody) &#123;</div><div class="line">      requestStartMessage += &quot; (&quot; + requestBody.contentLength() + &quot;-byte body)&quot;;</div><div class="line">    &#125;</div><div class="line">    logger.log(requestStartMessage);</div><div class="line">    //如果设置的级别是头，就打印头部分</div><div class="line">    if (logHeaders) &#123;</div><div class="line">      //如果有请求体，就将请求体的长度和类型打印</div><div class="line">      if (hasRequestBody) &#123;</div><div class="line">        //请求头的值，存在就拦截</div><div class="line">        if (requestBody.contentType() != null) &#123;</div><div class="line">          logger.log(&quot;Content-Type: &quot; + requestBody.contentType());</div><div class="line">        &#125;</div><div class="line">        //-1代表请求数据长度0</div><div class="line">        if (requestBody.contentLength() != -1) &#123;</div><div class="line">          logger.log(&quot;Content-Length: &quot; + requestBody.contentLength());</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      //请求头部分，遍历打印</div><div class="line">      Headers headers = request.headers();</div><div class="line">      for (int i = 0, count = headers.size(); i &lt; count; i++) &#123;</div><div class="line">        String name = headers.name(i);</div><div class="line">        // 这里因为上面已经打印了，所以就过滤一下</div><div class="line">        if (!&quot;Content-Type&quot;.equalsIgnoreCase(name) &amp;&amp; !&quot;Content-Length&quot;.equalsIgnoreCase(name)) &#123;</div><div class="line">          logger.log(name + &quot;: &quot; + headers.value(i));</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      //没有请求体，或者等级没有设置为打印请求体，结束打印</div><div class="line">      if (!logBody || !hasRequestBody) &#123;</div><div class="line">        logger.log(&quot;--&gt; END &quot; + request.method())；</div><div class="line">      &#125; else if (bodyEncoded(request.headers())) &#123;</div><div class="line">        //有请求体或者log等级设置为body，打印请求头中设置的编码</div><div class="line">        logger.log(&quot;--&gt; END &quot; + request.method() + &quot; (encoded body omitted)&quot;);</div><div class="line">      &#125; else &#123;</div><div class="line">        //将请求体数据给写进缓存流</div><div class="line">        Buffer buffer = new Buffer();</div><div class="line">        requestBody.writeTo(buffer);</div><div class="line">        //设置编码为utf-8</div><div class="line">        Charset charset = UTF8;</div><div class="line">        MediaType contentType = requestBody.contentType();</div><div class="line">        if (contentType != null) &#123;</div><div class="line">          charset = contentType.charset(UTF8);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        logger.log(&quot;&quot;);</div><div class="line">      //判断是否是人类可读的字符，是就打印</div><div class="line">        if (isPlaintext(buffer)) &#123;</div><div class="line">          logger.log(buffer.readString(charset));</div><div class="line">          logger.log(&quot;--&gt; END &quot; + request.method()</div><div class="line">              + &quot; (&quot; + requestBody.contentLength() + &quot;-byte body)&quot;);</div><div class="line">        &#125; else &#123;</div><div class="line">          //人类不懂，就用二进制读出来</div><div class="line">          logger.log(&quot;--&gt; END &quot; + request.method() + &quot; (binary &quot;</div><div class="line">              + requestBody.contentLength() + &quot;-byte body omitted)&quot;);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    long startNs = System.nanoTime();</div><div class="line">    Response response;</div><div class="line">    try &#123;</div><div class="line">      //请求开始</div><div class="line">      response = chain.proceed(request);</div><div class="line">    &#125; catch (Exception e) &#123;</div><div class="line">      //请求异常</div><div class="line">      logger.log(&quot;&lt;-- HTTP FAILED: &quot; + e);</div><div class="line">      throw e;</div><div class="line">    &#125;</div><div class="line">    //请求花费时间</div><div class="line">    long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);</div><div class="line">    //响应体了</div><div class="line">    ResponseBody responseBody = response.body();</div><div class="line">    long contentLength = responseBody.contentLength();</div><div class="line">    String bodySize = contentLength != -1 ? contentLength + &quot;-byte&quot; : &quot;unknown-length&quot;;</div><div class="line">    //打印长度和响应码，响应信息，响应体对应请求体（这里要考虑重定向url），请求耗费时间，响应体长度</div><div class="line">    logger.log(&quot;&lt;-- &quot; + response.code() + &apos; &apos; + response.message() + &apos; &apos;</div><div class="line">        + response.request().url() + &quot; (&quot; + tookMs + &quot;ms&quot; + (!logHeaders ? &quot;, &quot;</div><div class="line">        + bodySize + &quot; body&quot; : &quot;&quot;) + &apos;)&apos;);</div><div class="line">    //打印响应头</div><div class="line">    if (logHeaders) &#123;</div><div class="line">      Headers headers = response.headers();</div><div class="line">      for (int i = 0, count = headers.size(); i &lt; count; i++) &#123;</div><div class="line">        logger.log(headers.name(i) + &quot;: &quot; + headers.value(i));</div><div class="line">      &#125;</div><div class="line">       //响应体不存在，等级不为body</div><div class="line">      if (!logBody || !HttpHeaders.hasBody(response)) &#123;</div><div class="line">        logger.log(&quot;&lt;-- END HTTP&quot;);</div><div class="line">      &#125; else if (bodyEncoded(response.headers())) &#123;</div><div class="line">        //响应体编码不对称</div><div class="line">        logger.log(&quot;&lt;-- END HTTP (encoded body omitted)&quot;);</div><div class="line">      &#125; else &#123;</div><div class="line">        //source，响应体来了</div><div class="line">        BufferedSource source = responseBody.source();</div><div class="line">        //设置最大缓存大小，当然是缓存整个body喽，全吃</div><div class="line">        source.request(Long.MAX_VALUE); </div><div class="line">        Buffer buffer = source.buffer()；</div><div class="line">        Charset charset = UTF8;</div><div class="line">        //拿到media类型对应的字符集</div><div class="line">        MediaType contentType = responseBody.contentType();</div><div class="line">        if (contentType != null) &#123;</div><div class="line">          try &#123;</div><div class="line">            charset = contentType.charset(UTF8);</div><div class="line">          &#125; catch (UnsupportedCharsetException e) &#123;</div><div class="line">            logger.log(&quot;&quot;);</div><div class="line">            logger.log(&quot;Couldn&apos;t decode the response body; charset is likely malformed.&quot;);</div><div class="line">            logger.log(&quot;&lt;-- END HTTP&quot;);</div><div class="line"></div><div class="line">            return response;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">        //如果不是人类能看懂的，就不打印string形式的喽</div><div class="line">        if (!isPlaintext(buffer)) &#123;</div><div class="line">          logger.log(&quot;&quot;);</div><div class="line">          logger.log(&quot;&lt;-- END HTTP (binary &quot; + buffer.size() + &quot;-byte body omitted)&quot;);</div><div class="line">          return response;</div><div class="line">        &#125;</div><div class="line">        //是人类懂的，就开始读string喽</div><div class="line">        if (contentLength != 0) &#123;</div><div class="line">          logger.log(&quot;&quot;);</div><div class="line">          logger.log(buffer.clone().readString(charset));</div><div class="line">        &#125;</div><div class="line">        //最后打印body的长度</div><div class="line">        logger.log(&quot;&lt;-- END HTTP (&quot; + buffer.size() + &quot;-byte body)&quot;);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return response;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  /**</div><div class="line">   *判断缓存流的数据是否是人类能读懂的，哈哈，也就是abc123呗</div><div class="line">   */</div><div class="line">  static boolean isPlaintext(Buffer buffer) &#123;</div><div class="line">     //先判断是不是123abc能看懂的</div><div class="line">    try &#123;</div><div class="line">      Buffer prefix = new Buffer();</div><div class="line">      long byteCount = buffer.size() &lt; 64 ? buffer.size() : 64;</div><div class="line">      buffer.copyTo(prefix, 0, byteCount);</div><div class="line">      for (int i = 0; i &lt; 16; i++) &#123;</div><div class="line">        if (prefix.exhausted()) &#123;</div><div class="line">          break;</div><div class="line">        &#125;</div><div class="line">        //再判断是不是iso8859-1之类的，当然不是能懂的啊</div><div class="line">        int codePoint = prefix.readUtf8CodePoint();</div><div class="line">        if (Character.isISOControl(codePoint) &amp;&amp; !Character.isWhitespace(codePoint)) &#123;</div><div class="line">          return false;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      return true;</div><div class="line">    &#125; catch (EOFException e) &#123;</div><div class="line">      return false; // Truncated UTF-8 sequence.</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  //返回头中的编码是否存在并且不是identity，一般都是gzip,deflate,compress之中一个</div><div class="line">  private boolean bodyEncoded(Headers headers) &#123;</div><div class="line">    String contentEncoding = headers.get(&quot;Content-Encoding&quot;);</div><div class="line">    return contentEncoding != null &amp;&amp; !contentEncoding.equalsIgnoreCase(&quot;identity&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>好了终于撸了一遍源码，相信还有很多朋友没有看懂，解释这些源码干嘛啊，另外推荐一篇文章，大家踊跃去看吧(感谢<a href="http://home.cnblogs.com/u/yuanchongjie/" target="_blank" rel="external">ychongjie</a>的拦截器细致分析)：<br> <a href="http://www.cnblogs.com/yuanchongjie/p/4969326.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">链接直通车</a></p><blockquote><p>业余匆忙写作，不定期更新中~~~</p></blockquote>]]></content>
     
@@ -242,17 +293,17 @@
     
     </summary>
     
-      <category term="android" scheme="http://23.106.148.149/categories/android/"/>
+      <category term="android" scheme="http://47.94.170.102/categories/android/"/>
     
     
-      <category term="Interceptor拦截器" scheme="http://23.106.148.149/tags/Interceptor%E6%8B%A6%E6%88%AA%E5%99%A8/"/>
+      <category term="Interceptor拦截器" scheme="http://47.94.170.102/tags/Interceptor%E6%8B%A6%E6%88%AA%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>app沉浸式</title>
-    <link href="http://23.106.148.149/android/android/app%E6%B2%89%E6%B5%B8%E5%BC%8F/"/>
-    <id>http://23.106.148.149/android/android/app沉浸式/</id>
+    <link href="http://47.94.170.102/android/android/app%E6%B2%89%E6%B5%B8%E5%BC%8F/"/>
+    <id>http://47.94.170.102/android/android/app沉浸式/</id>
     <published>2016-09-19T16:00:00.000Z</published>
     <updated>2017-09-27T05:37:36.000Z</updated>
     
@@ -267,17 +318,65 @@
     
     </summary>
     
-      <category term="android" scheme="http://23.106.148.149/categories/android/"/>
+      <category term="android" scheme="http://47.94.170.102/categories/android/"/>
     
     
-      <category term="沉浸" scheme="http://23.106.148.149/tags/%E6%B2%89%E6%B5%B8/"/>
+      <category term="沉浸" scheme="http://47.94.170.102/tags/%E6%B2%89%E6%B5%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python教程(二)</title>
+    <link href="http://47.94.170.102/python/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
+    <id>http://47.94.170.102/python/python/Python教程(二)/</id>
+    <published>2016-09-18T16:00:00.000Z</published>
+    <updated>2018-03-29T06:13:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote><p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p></blockquote><a id="more"></a><h2 id="Python的函数"><a href="#Python的函数" class="headerlink" title="Python的函数"></a>Python的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class TestClass(object):</div><div class="line">    version = 1.9</div><div class="line">    def __init__(self,nm=&apos;xuwei&apos;):</div><div class="line">        self.name = nm</div><div class="line">        print(nm)</div><div class="line">    def showName(self):</div><div class="line">        print(self.name)</div><div class="line">    def showVersion(self):</div><div class="line">        print(self.version)</div><div class="line">myClass=TestClass()</div><div class="line">myClass.showName()</div><div class="line">myClass.showVersion()</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">sys.stdout.write(&apos;Hello World!\n&apos;)  # 代码的输出，调用了标准的write()方法</div><div class="line">print(sys.platform)  # 平台</div><div class="line">print(sys.version)  # python版本</div><div class="line"># help(dir)</div><div class="line">print(int(&apos;5&apos;))  # 5</div><div class="line">print(len(&apos;sdfas&apos;))  # 5</div><div class="line">print(list(range(5, 15, 2)))  # [5, 7, 9, 11, 13]</div><div class="line">print(str(3434))  # 3434</div><div class="line">print(type(56))  # &lt;class &apos;int&apos;&gt;</div><div class="line"># input(&apos;输入：&apos;)  # 输入：45</div><div class="line">print(dir(sys))  # sys模块中的所有属性</div><div class="line">print(dir)  # &lt;built-in function dir&gt;</div><div class="line">print(dir())  # 没有提供参数，就是显示全局变量的名字的列表print(type(dir))  # &lt;class &apos;builtin_function_or_method&apos;&gt;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;函数的5类参数&quot;&gt;&lt;a href=&quot;#函数的5类参数&quot; class=&quot;headerlink&quot; title=&quot;函数的5类参数&quot;&gt;&lt;/a&gt;函数的5类参数&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://47.94.170.102/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://47.94.170.102/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pip相关</title>
+    <link href="http://47.94.170.102/python/python/pip%E7%9B%B8%E5%85%B3/"/>
+    <id>http://47.94.170.102/python/python/pip相关/</id>
+    <published>2016-09-18T16:00:00.000Z</published>
+    <updated>2018-03-29T06:14:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="pip更新"><a href="#pip更新" class="headerlink" title="pip更新"></a>pip更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install --upgrade pip</div><div class="line">python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本</div></pre></td></tr></table></figure><a id="more"></a><h2 id="win10中python2和python3并存，安装模块"><a href="#win10中python2和python3并存，安装模块" class="headerlink" title="win10中python2和python3并存，安装模块"></a>win10中python2和python3并存，安装模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install xxx</div><div class="line">python3 -m pip install xxx</div></pre></td></tr></table></figure><h2 id="windows上python无法安装lxml"><a href="#windows上python无法安装lxml" class="headerlink" title="windows上python无法安装lxml"></a>windows上python无法安装lxml</h2><h3 id="下载模块"><a href="#下载模块" class="headerlink" title="下载模块"></a>下载模块</h3><p><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml" target="_blank" rel="external">lxml</a>，从这里找到对应的whl文件下载</p><h3 id="安装wheel"><a href="#安装wheel" class="headerlink" title="安装wheel"></a>安装wheel</h3><p>pip3 install wheel</p><h3 id="安装下载的模块"><a href="#安装下载的模块" class="headerlink" title="安装下载的模块"></a>安装下载的模块</h3><p>安装lxml<br>pip3 install 下载的对应模块路径</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;pip更新&quot;&gt;&lt;a href=&quot;#pip更新&quot; class=&quot;headerlink&quot; title=&quot;pip更新&quot;&gt;&lt;/a&gt;pip更新&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;python2 -m pip install --upgrade pip&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://47.94.170.102/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://47.94.170.102/tags/python/"/>
+    
+      <category term="pip" scheme="http://47.94.170.102/tags/pip/"/>
     
   </entry>
   
   <entry>
     <title>时间复杂度O(n),空间复杂度O(1)</title>
-    <link href="http://23.106.148.149/other/other/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%AE%97%E6%B3%95/"/>
-    <id>http://23.106.148.149/other/other/复杂度算法/</id>
+    <link href="http://47.94.170.102/other/other/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%AE%97%E6%B3%95/"/>
+    <id>http://47.94.170.102/other/other/复杂度算法/</id>
     <published>2016-09-18T16:00:00.000Z</published>
     <updated>2017-09-27T05:37:36.000Z</updated>
     
@@ -292,19 +391,19 @@
     
     </summary>
     
-      <category term="other" scheme="http://23.106.148.149/categories/other/"/>
+      <category term="other" scheme="http://47.94.170.102/categories/other/"/>
     
     
-      <category term="O(n)和O(1)" scheme="http://23.106.148.149/tags/O-n-%E5%92%8CO-1/"/>
+      <category term="O(n)和O(1)" scheme="http://47.94.170.102/tags/O-n-%E5%92%8CO-1/"/>
     
   </entry>
   
   <entry>
     <title>Python教程(一)</title>
-    <link href="http://23.106.148.149/python/python/Python%E6%95%99%E7%A8%8B(%E4%B8%80)/"/>
-    <id>http://23.106.148.149/python/python/Python教程(一)/</id>
+    <link href="http://47.94.170.102/python/python/Python%E6%95%99%E7%A8%8B(%E4%B8%80)/"/>
+    <id>http://47.94.170.102/python/python/Python教程(一)/</id>
     <published>2016-09-18T16:00:00.000Z</published>
-    <updated>2018-03-29T06:16:44.930Z</updated>
+    <updated>2018-03-29T06:16:44.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Python的特点"><a href="#Python的特点" class="headerlink" title="Python的特点"></a>Python的特点</h2><p>Python是一门解释性语言，它是多种语言的精华的集合，它从Perl（另外一种远远超越了标准的shell脚本的脚本语言），python的正则表达式引擎就是基于Perl（它最大的优势就在于它的字符串模式匹配能力）。Python和java比较来说，他们都有类似的面向对象特性和语法，他们之间还诞生了一个可以在只有java环境中于运行Python程序的只用java编写的Python解释器Jython。JavaScript也是类似Python的面向对象脚本语言，但是JavaScript是基于原型设计的，Python是遵循面向对象系统，二者的类和对象有一些 差异。其他的就不记录了，太多了，记录主要的几个自己知道的语言。</p><ol><li>一般的Python解释器是用C编写的，又叫CPython</li><li>相对的用java编写的就是前面提到的JPython，不作描述。</li><li>IronPython，用C#语言完成，适用环境为.NET和Mono</li><li>Stackless是针对CPython的修改。<a id="more"></a><h2 id="Python起步"><a href="#Python起步" class="headerlink" title="Python起步"></a>Python起步</h2><h3 id="程序输出"><a href="#程序输出" class="headerlink" title="程序输出"></a>程序输出</h3></li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; &apos;hello&apos;#交互式解释器调用repr()函数来显示对象</div><div class="line">&apos;hello&apos;</div><div class="line">&gt;&gt;&gt; print(&apos;hello&apos;)#print语句调用str()函数显示对象</div><div class="line">hello</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; print(&apos;姓名：%s 年龄：%d&apos;%(&apos;python&apos;,23))  # 输出格式化，占位符</div><div class="line">姓名：python 年龄：23</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; user = input()  # 控制台输入</div><div class="line">&gt;? dlfkjs</div><div class="line">&gt;&gt;&gt; print(user)</div><div class="line">dlfkjs</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; 3+2</div><div class="line">5</div><div class="line">&gt;&gt;&gt; 3-2</div><div class="line">1</div><div class="line">&gt;&gt;&gt; 3 * 2</div><div class="line">6</div><div class="line">&gt;&gt;&gt; 3 / 2</div><div class="line">1.5</div><div class="line">&gt;&gt;&gt; 3 // 2  # 整除</div><div class="line">1</div><div class="line">&gt;&gt;&gt; 3 ** 2  # 3的2次方</div><div class="line">9</div><div class="line">&gt;&gt;&gt; 3 % 2  # 模</div><div class="line">1</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">## 标准比较运算符</div><div class="line">&gt;&gt;&gt; 1 &lt; 2</div><div class="line">True</div><div class="line">&gt;&gt;&gt; 1 &lt;= 2</div><div class="line">True</div><div class="line">&gt;&gt;&gt; 1 &gt; 2</div><div class="line">False</div><div class="line">&gt;&gt;&gt; 1 &gt;= 2</div><div class="line">False</div><div class="line">&gt;&gt;&gt; 1 ==2</div><div class="line">False</div><div class="line">&gt;&gt;&gt; 1 != 2</div><div class="line">True</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">## 逻辑运算符</div><div class="line">&gt;&gt;&gt; 4&gt;2 and 2&gt;4  # 变种&gt;&gt;&gt; 2 &lt; 4 &lt; 2</div><div class="line">False</div><div class="line">&gt;&gt;&gt; 4&gt;2 or 2&gt;4</div><div class="line">True</div><div class="line">&gt;&gt;&gt; not 2 &gt; 4</div><div class="line">True</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; num = 4</div><div class="line">&gt;&gt;&gt; num *= 10  # 相当于num = num * 10</div><div class="line">&gt;&gt;&gt; print(num)</div><div class="line">40</div><div class="line"># 不过python不支持num++ 和num--等，++num就是num，--num也相当于num</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; &apos;asdf&apos;[0]</div><div class="line">&apos;a&apos;</div><div class="line">&gt;&gt;&gt; &apos;asdf&apos;*3</div><div class="line">&apos;asdfasdfasdf&apos;</div><div class="line">&gt;&gt;&gt; &apos;asdf&apos;[1 : 3]</div><div class="line">&apos;sd&apos;</div><div class="line">&gt;&gt;&gt; &apos;asdf&apos;[1:]</div><div class="line">&apos;sdf&apos;</div><div class="line">&gt;&gt;&gt; &apos;asdf&apos;[:3]</div><div class="line">&apos;asd&apos;</div><div class="line">&gt;&gt;&gt; &apos;asdf&apos;[:]</div><div class="line">&apos;asdf&apos;</div><div class="line">&gt;&gt;&gt; &apos;asdf&apos;[-1:]</div><div class="line">&apos;f&apos;</div><div class="line">&gt;&gt;&gt; &apos;asdf&apos;[:-3]</div><div class="line">&apos;a&apos;</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># 列表是有序的，元组是有序的</div><div class="line">&gt;&gt;&gt; aList = [1, &apos;a&apos;, 2, &apos;b&apos;, 3, &apos;c&apos;]  # 列表切片还是列表</div><div class="line">&gt;&gt;&gt; aList[1:5]</div><div class="line">[&apos;a&apos;, 2, &apos;b&apos;, 3]</div><div class="line">&gt;&gt;&gt; aTuple = (1, &apos;a&apos;, 2, &apos;b&apos;, 3, &apos;c&apos;)  # 元组切片还是元组</div><div class="line">&gt;&gt;&gt; aTuple[1:5]</div><div class="line">(&apos;a&apos;, 2, &apos;b&apos;, 3)</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"># 元素是无序的</div><div class="line">&gt;&gt;&gt; aDict = &#123;&apos;aaa&apos;:&apos;bbb&apos;&#125;</div><div class="line">&gt;&gt;&gt; aDict[&apos;111&apos;] = 333</div><div class="line">&gt;&gt;&gt; aDict</div><div class="line">&#123;&apos;111&apos;: 333, &apos;aaa&apos;: &apos;bbb&apos;&#125;</div><div class="line">&gt;&gt;&gt; aDict[&apos;222&apos;] = 444</div><div class="line">&gt;&gt;&gt; aDict</div><div class="line">&#123;&apos;111&apos;: 333, &apos;222&apos;: 444, &apos;aaa&apos;: &apos;bbb&apos;&#125;</div><div class="line">&gt;&gt;&gt; aDict.keys()</div><div class="line">dict_keys([&apos;111&apos;, &apos;222&apos;, &apos;aaa&apos;])</div><div class="line">&gt;&gt;&gt; aDict[&apos;111&apos;]</div><div class="line">333</div><div class="line">&gt;&gt;&gt; for key in aDict:</div><div class="line">...     print(&apos;key = &apos;,key,&apos;valse = &apos;,aDict[key])</div><div class="line">...     </div><div class="line">key =  111 valse =  333</div><div class="line">key =  222 valse =  444</div><div class="line">key =  aaa valse =  bbb</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"># if语句</div><div class="line">&gt;&gt;&gt; if 1 &gt; 2:</div><div class="line">...     print(&apos;1&apos;)</div><div class="line">... elif 2 &gt; 3:</div><div class="line">...     print(&apos;2&apos;)</div><div class="line">... else:</div><div class="line">...     print(&apos;3&apos;)</div><div class="line">...     </div><div class="line">3</div><div class="line"># while语句</div><div class="line">&gt;&gt;&gt; while x &lt; 3:</div><div class="line">...     print(x)</div><div class="line">...     x += 1</div><div class="line">...     </div><div class="line">0</div><div class="line">1</div><div class="line">2</div><div class="line"># for循环和range()内建函数</div><div class="line">&gt;&gt;&gt; foo = &apos;abcde&apos;  # 遍历字符串中的字符</div><div class="line">&gt;&gt;&gt; for i in range(len(foo)):</div><div class="line">...     print(foo[i],&apos;%d&apos;%i)</div><div class="line">...     </div><div class="line">a 0</div><div class="line">b 1</div><div class="line">c 2</div><div class="line">d 3</div><div class="line">遍历key，char的简易用法</div><div class="line">&gt;&gt;&gt; for i ,ch in enumerate(foo):</div><div class="line">...     print(ch,i)</div><div class="line">...     </div><div class="line">a 0</div><div class="line">b 1</div><div class="line">c 2</div><div class="line">d 3</div><div class="line">e 4</div><div class="line"># 列表解析</div><div class="line">&gt;&gt;&gt; squared = [x ** 2 for x in range(4)]</div><div class="line">&gt;&gt;&gt; for i in squared:</div><div class="line">...     print(i)</div><div class="line">...     </div><div class="line">0</div><div class="line">1</div><div class="line">4</div><div class="line">9</div><div class="line"># 后边还可以进行筛选循环之后的结果后，进行最后解析</div><div class="line">&gt;&gt;&gt; squared = [x ** 2 for x in range(4) if not x % 2]  # 0是False，1是True</div><div class="line">&gt;&gt;&gt; for i in squared:</div><div class="line">...     print(i)</div><div class="line">...     </div><div class="line">0</div><div class="line">4</div></pre></td></tr></table></figure><h2 id="异常的捕捉"><a href="#异常的捕捉" class="headerlink" title="异常的捕捉"></a>异常的捕捉</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">try:</div><div class="line">    raiseexcept Exception as e:</div><div class="line">    t,v,tb = sys.exc_info()  # 异常的类型名称，异常实例，追溯异常流程对象traceback</div><div class="line">    print(t,v,tb)</div></pre></td></tr></table></figure><h2 id="文件和内建函数open-和file"><a href="#文件和内建函数open-和file" class="headerlink" title="文件和内建函数open()和file()"></a>文件和内建函数open()和file()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">fileName = &apos;.gitignore&apos;</div><div class="line">file = open(fileName, &apos;r&apos;)</div><div class="line">try:</div><div class="line">    for line in file:  # 最快的读取每一行文本的方法        </div><div class="line">        # lineline = line.rstrip(&apos;\n&apos;) # 去除每行末尾的\n符号</div><div class="line">        lineline = line.rstrip()  # 去除\n和空白符</div><div class="line">        print(lineline)</div><div class="line">    file.close()</div><div class="line">except Exception as e:  # python3要求我们的异常必须继承Exception类，这样可以捕获所有异常</div><div class="line">           print(e)</div><div class="line">print(&apos;-&apos;*20)</div><div class="line">file = open(fileName)</div><div class="line">try:</div><div class="line">    splitlines = file.readlines()  # 将所有行一次读出来    </div><div class="line">    # splitlines = file.read().splitlines()  # 将\n给去除</div><div class="line">    splitlines = file.read().split(&apos;\n&apos;)  # 另一种方法去除</div><div class="line">    file.close()</div><div class="line">    for line in splitlines:</div><div class="line">        print(line,end=&apos;&apos;)</div><div class="line">except Exception as e:  # python3要求我们的异常必须继承Exception类，这样可以捕获所有异常</div><div class="line">             print(e)</div></pre></td></tr></table></figure>]]></content>
     
@@ -319,17 +418,17 @@
     
     </summary>
     
-      <category term="python" scheme="http://23.106.148.149/categories/python/"/>
+      <category term="python" scheme="http://47.94.170.102/categories/python/"/>
     
     
-      <category term="python" scheme="http://23.106.148.149/tags/python/"/>
+      <category term="python" scheme="http://47.94.170.102/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>Hexo+Github搭建自己的博客</title>
-    <link href="http://23.106.148.149/other/other/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
-    <id>http://23.106.148.149/other/other/搭建博客/</id>
+    <link href="http://47.94.170.102/other/other/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://47.94.170.102/other/other/搭建博客/</id>
     <published>2016-09-18T16:00:00.000Z</published>
     <updated>2017-09-27T06:00:30.000Z</updated>
     
@@ -343,60 +442,12 @@
     
     </summary>
     
-      <category term="other" scheme="http://23.106.148.149/categories/other/"/>
+      <category term="other" scheme="http://47.94.170.102/categories/other/"/>
     
     
-      <category term="Hexo" scheme="http://23.106.148.149/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://47.94.170.102/tags/Hexo/"/>
     
-      <category term="node.js" scheme="http://23.106.148.149/tags/node-js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python教程(二)</title>
-    <link href="http://23.106.148.149/python/python/Python%E6%95%99%E7%A8%8B(%E4%BA%8C)/"/>
-    <id>http://23.106.148.149/python/python/Python教程(二)/</id>
-    <published>2016-09-18T16:00:00.000Z</published>
-    <updated>2018-03-29T06:13:00.759Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="函数的5类参数"><a href="#函数的5类参数" class="headerlink" title="函数的5类参数"></a>函数的5类参数</h2><blockquote><p>python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。</p></blockquote><a id="more"></a><h2 id="Python的函数"><a href="#Python的函数" class="headerlink" title="Python的函数"></a>Python的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class TestClass(object):</div><div class="line">    version = 1.9</div><div class="line">    def __init__(self,nm=&apos;xuwei&apos;):</div><div class="line">        self.name = nm</div><div class="line">        print(nm)</div><div class="line">    def showName(self):</div><div class="line">        print(self.name)</div><div class="line">    def showVersion(self):</div><div class="line">        print(self.version)</div><div class="line">myClass=TestClass()</div><div class="line">myClass.showName()</div><div class="line">myClass.showVersion()</div></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">sys.stdout.write(&apos;Hello World!\n&apos;)  # 代码的输出，调用了标准的write()方法</div><div class="line">print(sys.platform)  # 平台</div><div class="line">print(sys.version)  # python版本</div><div class="line"># help(dir)</div><div class="line">print(int(&apos;5&apos;))  # 5</div><div class="line">print(len(&apos;sdfas&apos;))  # 5</div><div class="line">print(list(range(5, 15, 2)))  # [5, 7, 9, 11, 13]</div><div class="line">print(str(3434))  # 3434</div><div class="line">print(type(56))  # &lt;class &apos;int&apos;&gt;</div><div class="line"># input(&apos;输入：&apos;)  # 输入：45</div><div class="line">print(dir(sys))  # sys模块中的所有属性</div><div class="line">print(dir)  # &lt;built-in function dir&gt;</div><div class="line">print(dir())  # 没有提供参数，就是显示全局变量的名字的列表print(type(dir))  # &lt;class &apos;builtin_function_or_method&apos;&gt;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;函数的5类参数&quot;&gt;&lt;a href=&quot;#函数的5类参数&quot; class=&quot;headerlink&quot; title=&quot;函数的5类参数&quot;&gt;&lt;/a&gt;函数的5类参数&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;python函数可以传入5类参数，顺序为：必选参数-默认参数-可变参数/命名关键字参数-关键字参数。其中可变参数和命名关键字参数不能组合使用。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="http://23.106.148.149/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://23.106.148.149/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pip相关</title>
-    <link href="http://23.106.148.149/python/python/pip%E7%9B%B8%E5%85%B3/"/>
-    <id>http://23.106.148.149/python/python/pip相关/</id>
-    <published>2016-09-18T16:00:00.000Z</published>
-    <updated>2018-03-29T06:14:22.516Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="pip更新"><a href="#pip更新" class="headerlink" title="pip更新"></a>pip更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install --upgrade pip</div><div class="line">python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本</div></pre></td></tr></table></figure><a id="more"></a><h2 id="win10中python2和python3并存，安装模块"><a href="#win10中python2和python3并存，安装模块" class="headerlink" title="win10中python2和python3并存，安装模块"></a>win10中python2和python3并存，安装模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python2 -m pip install xxx</div><div class="line">python3 -m pip install xxx</div></pre></td></tr></table></figure><h2 id="windows上python无法安装lxml"><a href="#windows上python无法安装lxml" class="headerlink" title="windows上python无法安装lxml"></a>windows上python无法安装lxml</h2><h3 id="下载模块"><a href="#下载模块" class="headerlink" title="下载模块"></a>下载模块</h3><p><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml" target="_blank" rel="external">lxml</a>，从这里找到对应的whl文件下载</p><h3 id="安装wheel"><a href="#安装wheel" class="headerlink" title="安装wheel"></a>安装wheel</h3><p>pip3 install wheel</p><h3 id="安装下载的模块"><a href="#安装下载的模块" class="headerlink" title="安装下载的模块"></a>安装下载的模块</h3><p>安装lxml<br>pip3 install 下载的对应模块路径</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;pip更新&quot;&gt;&lt;a href=&quot;#pip更新&quot; class=&quot;headerlink&quot; title=&quot;pip更新&quot;&gt;&lt;/a&gt;pip更新&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;python2 -m pip install --upgrade pip&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;python3 -m pip install --upgrade pip #这里的python依据你的python名字，我个人改为了python2和python3，是为了兼容2个版本&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="http://23.106.148.149/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://23.106.148.149/tags/python/"/>
-    
-      <category term="pip" scheme="http://23.106.148.149/tags/pip/"/>
+      <category term="node.js" scheme="http://47.94.170.102/tags/node-js/"/>
     
   </entry>
   
